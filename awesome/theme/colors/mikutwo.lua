@@ -14,6 +14,6 @@ colorsheme.orange = "#ff7f11"
 colorsheme.violet = "#b736c8"
 colorsheme.cyan = "#0596f6"
 colorsheme.accent = colorsheme.violet
-colorsheme.accent2 = colorsheme.cyan
+colorsheme.accent2 = "#0596f6"
 
 return colorsheme

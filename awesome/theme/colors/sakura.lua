@@ -15,3 +15,5 @@ colorsheme.violet = "#c29ade"
 colorsheme.cyan = "#82d8f6"
 colorsheme.accent = colorsheme.red
 colorsheme.accent2 = "#f9ccd1"
+
+return colorsheme

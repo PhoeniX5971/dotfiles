@@ -7,7 +7,9 @@ These dotfiles contain work done by [Sinomor](https://github.com/Sinomor), [ML4W
 For arch linux install dependencies with:
 
 ```bash
-sudo pacman -Syu feh xclip gpick xorg-xrdb picom polkit-gnome \ fontconfig imagemagick zbar slop shotgun flameshot playerctl \ brightnessctl python3 xsettingsd ttf-nerd-fonts-symbols
+sudo pacman -Syu feh xclip gpick xorg-xrdb picom polkit-gnome \
+fontconfig imagemagick zbar slop shotgun flameshot playerctl \
+brightnessctl python3 xsettingsd ttf-nerd-fonts-symbols
 ```
 
 You also need the awesome-git package, which can be downloaded from the AUR. Assuming you are using the "yay" AUR helper:
