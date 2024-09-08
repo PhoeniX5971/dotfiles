@@ -2,6 +2,10 @@
 
 These dotfiles contain work done by [Sinomor](https://github.com/Sinomor), [ML4W](https://gitlab.com/stephan-raabe/dotfiles), [refact0r](https://github.com/refact0r/system24), [spicetify](https://github.com/spicetify/spicetify-themes/tree/master/text).
 
+## Preview
+
+[Go To Preview.md](./PREVIEW.md)
+
 ## Install
 
 For arch linux install dependencies with:
