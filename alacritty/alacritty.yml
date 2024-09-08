@@ -1,0 +1,25 @@
+colors:
+  primary:
+    background: "0x0d1e38" # Dark blue background
+    foreground: "0xeff7ff" # White foreground
+
+  normal:
+    black: "0x1e1e2e" # Dark blue
+    red: "0xfa9ab2" # Light red
+    green: "0x8fe396" # Light green
+    yellow: "0xf6de8a" # Light yellow
+    blue: "0x74a6d7" # Light blue
+    magenta: "0xd8a7ff" # Light purple (Miku accent color)
+    cyan: "0xb3f0eb" # Light cyan
+    white: "0xeff7ff" # White
+
+  bright:
+    black: "0x313244" # Darker blue
+    red: "0xf38ba8" # Light red
+    green: "0xa6e3a1" # Light green
+    yellow: "0xf9e2af" # Light yellow
+    blue: "0x89b4fa" # Light blue
+    magenta: "0xcba6f7" # Light purple (Miku accent color)
+    cyan: "0x94e2d5" # Light cyan
+    white: "0xeff7ff" # White
+  opacity: 0.8
