@@ -7,7 +7,7 @@ local colorsheme = require("theme.colors." .. user.color)
 
 local theme = {}
 
-theme.font = "JetBrainsMono Nerd Font 11"
+theme.font = "DM Mono 11"
 theme.useless_gap = 5
 
 -- icons --
