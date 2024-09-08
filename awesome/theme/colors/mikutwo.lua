@@ -13,7 +13,7 @@ colorsheme.red = "#c50213"
 colorsheme.orange = "#ff7f11"
 colorsheme.violet = "#b736c8"
 colorsheme.cyan = "#0596f6"
-colorsheme.silver = "#0596f6" -- Not an actual color, edit for adding kafu
 colorsheme.accent = colorsheme.violet
+colorsheme.accent2 = colorsheme.cyan
 
 return colorsheme

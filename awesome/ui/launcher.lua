@@ -213,7 +213,7 @@ function gen(mode)
 			local open_command = {
 				["clipboard"] = "echo " .. "'" .. entry .. "'" .. " | xclip -r -sel clipboard",
 				["books"] = "cd " .. dir .. " && zathura " .. entry,
-				-- ["themes"] = "python3 ~/Code/Python/scripts/theme_switcher.py " .. entry,
+				["themes"] = "python3 ~/Code/Python/scripts/theme_switcher.py " .. entry,
 			}
 			table.insert(entries, { name = entry, appinfo = open_command[mode] })
 		end

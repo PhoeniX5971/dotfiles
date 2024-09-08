@@ -13,7 +13,7 @@ colorsheme.red = "#c50213"
 colorsheme.orange = "#ff7f11"
 colorsheme.violet = "#b736c8"
 colorsheme.cyan = "#0596f6"
-colorsheme.silver = "#aeb0d8"
 colorsheme.accent = colorsheme.blue
+colorsheme.accent2 = "#aeb0d8"
 
 return colorsheme

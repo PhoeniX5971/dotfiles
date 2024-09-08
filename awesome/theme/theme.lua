@@ -35,7 +35,7 @@ theme.cyan = colorsheme.cyan
 theme.red = colorsheme.red
 theme.orange = colorsheme.orange
 theme.violet = colorsheme.violet
-theme.silver = colorsheme.silver
+theme.accent2 = colorsheme.accent2
 theme.accent = colorsheme.accent
 
 -- tray --
@@ -80,7 +80,7 @@ theme.taglist_bg_focus = theme.accent
 theme.taglist_fg_focus = theme.bg
 theme.taglist_bg_urgent = theme.fg_alt
 theme.taglist_fg_urgent = theme.fg
-theme.taglist_bg_occupied = theme.silver
+theme.taglist_bg_occupied = theme.accent2
 theme.taglist_fg_occupied = theme.fg
 theme.taglist_bg_empty = theme.bg_alt
 theme.taglist_fg_empty = theme.fg
