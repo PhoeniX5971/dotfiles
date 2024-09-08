@@ -7,9 +7,7 @@ These dotfiles contain work done by [Sinomor](https://github.com/Sinomor), [ML4W
 For arch linux install dependencies with:
 
 ```bash
-sudo pacman -Syu feh xclip gpick xorg-xrdb picom polkit-gnome \
-fontconfig imagemagick zbar slop shotgun flameshot playerctl \
-brightnessctl python3 xsettingsd ttf-nerd-fonts-symbols
+sudo pacman -Syu feh xclip gpick xorg-xrdb picom polkit-gnome \ fontconfig imagemagick zbar slop shotgun flameshot playerctl \ brightnessctl python3 xsettingsd ttf-nerd-fonts-symbols
 ```
 
 You also need the awesome-git package, which can be downloaded from the AUR. Assuming you are using the "yay" AUR helper:
@@ -40,3 +38,5 @@ cp .bashrc ~/.bashrc
 ```
 
 Now reboot and login into awesome and everything should hopefully work.
+
+> IMPORTANT NOTE: The current color scheme generator for the terminal is using the .config/.awesome/scripts/theme/{colorscheme} which uses a predefined wallpaper, you should change those to wallpaper of your own to work.
