@@ -40,9 +40,9 @@
   /* main background color. */
   --bg-1: #111328;
   /* background color for secondary elements like code blocks, embeds, etc. */
-  --bg-2: #262b4b;
+  --bg-2: #242446;
   /* color of neutral buttons. */
-  --bg-3: #262b4b;
+  --bg-3: #242446;
   /* color of neutral buttons when hovered. */
 
   /* state modifiers */
@@ -68,7 +68,7 @@
   /* color of muted text. */
 
   /* accent colors */
-  --acc-0: #283dec;
+  --acc-0: #b736c8;
   /* main accent color. */
   --acc-1: #0596f6;
   /* color of accent buttons when hovered. */

@@ -22,7 +22,7 @@ def restart_awesome_wm():
     except subprocess.CalledProcessError as e:
         print(f"Failed to restart AwesomeWM: {e}")
 
-file = "/home/phoenix/.config/awesome/user.lua"
+file = "~/.config/awesome/user.lua"
 
 with open(file, "r") as f:
     data = f.readlines()
