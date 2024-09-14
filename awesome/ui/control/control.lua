@@ -234,10 +234,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 		layout = wibox.layout.flex.vertical,
 		forced_width = 314,
 		spacing = 11,
-		create_fetch_comp(
-			"",
-			[[ distro | grep "Name:" | awk '{sub(/^Name: /, ""); print}' | awk '{print $1 " " $2}' ]]
-		),
+		create_fetch_comp("", [[ grep '^NAME=' /etc/os-release | awk -F'=' '{print $2}' | sed 's/"//g' ]]),
 		create_fetch_comp("", [[ uname -r ]]),
 		create_fetch_comp("", [[ xbps-query -l | wc -l ]]),
 		create_fetch_comp("", [[ echo Awesome WM ]]),
