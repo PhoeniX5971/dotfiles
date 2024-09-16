@@ -12,7 +12,7 @@ user.tray = true
 
 -- actual colorsheme --
 
-user.color = "mikutwo"
+user.color = "kafu"
 
 -- openweather --
 
