@@ -4,37 +4,37 @@ local beautiful = require("beautiful")
 require("ui.lock")
 
 local elements = {
-	{"poweroff", command = "loginctl poweroff", icon = ""},
-	{"exit", command = "awesome-client 'awesome.quit()'", icon = ""},
-	{"reboot", command = "loginctl reboot", icon = ""},
-	{"suspend", command = "awesome-client 'lockscreen()'", icon = ""},
+	{ "poweroff", command = "poweroff", icon = "" },
+	{ "exit", command = "awesome-client 'awesome.quit()'", icon = "" },
+	{ "reboot", command = "reboot", icon = "" },
+	{ "suspend", command = "awesome-client 'lockscreen()'", icon = "" },
 }
 
-local elements_container = wibox.widget {
+local elements_container = wibox.widget({
 	homogeneous = false,
 	expand = true,
 	forced_num_cols = 2,
 	forced_num_rows = 2,
 	spacing = 10,
-	layout = wibox.layout.grid
-}
+	layout = wibox.layout.grid,
+})
 
-local prompt = wibox.widget {
+local prompt = wibox.widget({
 	widget = wibox.widget.textbox,
-	visible = false
-}
+	visible = false,
+})
 
-local main = wibox.widget{
+local main = wibox.widget({
 	widget = wibox.container.margin,
 	margins = 10,
 	{
 		layout = wibox.layout.fixed.vertical,
 		prompt,
-		elements_container
-	}
-}
+		elements_container,
+	},
+})
 
-local powermenu = awful.popup {
+local powermenu = awful.popup({
 	visible = false,
 	ontop = true,
 	bg = beautiful.bg,
@@ -43,8 +43,8 @@ local powermenu = awful.popup {
 	placement = function(d)
 		awful.placement.centered(d)
 	end,
-	widget = main
-}
+	widget = main,
+})
 
 local function next()
 	if index_element == 2 then
@@ -73,12 +73,10 @@ local function down()
 end
 
 local function add_elements()
-
 	elements_container:reset()
 
 	for i, element in ipairs(elements) do
-
-		local element_widget = wibox.widget {
+		local element_widget = wibox.widget({
 			widget = wibox.container.background,
 			bg = beautiful.bg,
 			forced_width = 140,
@@ -91,16 +89,16 @@ local function add_elements()
 						index_element = i
 						add_elements()
 					end
-				end)
+				end),
 			},
 			{
 				widget = wibox.widget.textbox,
 				fg = beautiful.fg,
 				align = "center",
-				font = beautiful.font.." 38",
-				markup = element.icon
-			}
-		}
+				font = beautiful.font .. " 38",
+				markup = element.icon,
+			},
+		})
 
 		elements_container:add(element_widget)
 
@@ -108,18 +106,15 @@ local function add_elements()
 			element_widget.bg = beautiful.accent
 			element_widget.fg = beautiful.bg
 		end
-
 	end
-
 end
 
 local function open()
-
 	powermenu.visible = true
 	index_element = 1
 	add_elements()
 
-	awful.prompt.run {
+	awful.prompt.run({
 		textbox = prompt,
 		exe_callback = function()
 			awful.spawn(elements[index_element].command)
@@ -141,9 +136,8 @@ local function open()
 		end,
 		done_callback = function()
 			powermenu.visible = false
-		end
-	}
-
+		end,
+	})
 end
 
 local function close()
@@ -165,8 +159,6 @@ client.connect_signal("button::press", function()
 	close()
 end)
 
-awful.mouse.append_global_mousebinding(
-	awful.button({ }, 1, function()
-		close()
-	end)
-)
+awful.mouse.append_global_mousebinding(awful.button({}, 1, function()
+	close()
+end))
