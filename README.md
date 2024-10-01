@@ -13,7 +13,8 @@ For arch linux install dependencies with:
 ```bash
 sudo pacman -Syu feh xclip gpick xorg-xrdb picom polkit-gnome \
 fontconfig imagemagick zbar slop shotgun flameshot playerctl \
-brightnessctl python3 xsettingsd ttf-nerd-fonts-symbols
+brightnessctl python3 xsettingsd ttf-nerd-fonts-symbols \
+nitrogen picom
 ```
 
 You also need the awesome-git package, which can be downloaded from the AUR. Assuming you are using the "yay" AUR helper:
@@ -38,6 +39,12 @@ Move everything to it's place.
 cd dotfiles
 cp -r Thunar/ Vencord/ alacritty/ awesome/ btop/ cava/ flameshot/ kitty/ \
 login/ neofetch/ nvim/ rofi/ sddm/ spicetify/ starship/ swappy/ wal/ ~/.config/
+mkdir -p ~/.themes
+mkdir -p ~/.icons
+mkdir -p ~/.fonts
+mv .themes ~/.themes/
+mv .icons ~/.icons/
+mv .fonts ~/.fonts/
 mkdir -p ~/Code/Python/scripts/scripts
 cp scripts/themeswitcher.py ~/Code/Python/scripts/theme_switcher.py
 cp .bashrc ~/.bashrc

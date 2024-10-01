@@ -89,7 +89,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 		spacing = 10,
 		create_arcchart_widget(cpu, "signal::cpu", beautiful.bg_urgent, beautiful.red, 15, "Cpu:", ""),
 		create_arcchart_widget(ram, "signal::ram", beautiful.bg_urgent, beautiful.yellow, 15, "Ram:", ""),
-		create_arcchart_widget(disk, "signal::disk", beautiful.bg_urgent, beautiful.blue, 15, "Disk:", ""),
+		create_arcchart_widget(disk, "signal::disk", beautiful.bg_urgent, beautiful.green, 15, "Disk:", ""),
 	})
 
 	-- progressbars --
