@@ -1,0 +1,51 @@
+local gears = require("gears")
+local dpi = require("beautiful").xresources.apply_dpi
+
+local theme = {}
+
+theme.font = "DM Mono Bold 14"
+
+theme.bg_normal = "#151515"
+theme.bg_focus = "#2f2f2f"
+theme.bg_urgent = "#ac4142"
+
+theme.fg_normal = "#d0d0d0"
+theme.fg_focus = "#d0d0d0"
+theme.fg_urgent = "#ac4142"
+
+theme.tasklist_bg_focus = "#151515"
+theme.tasklist_bg_urgent = "#151515"
+theme.tasklist_fg_normal = "#d0d0d0" .. "25"
+theme.tasklist_fg_focus = "#d0d0d0"
+theme.tasklist_fg_urgent = "#ac4142"
+theme.tasklist_fg_minimize = "#d0d0d0" .. "25"
+theme.tasklist_font_minimized = "JetBrains Mono NF Italic Bold 13"
+theme.tasklist_plain_task_name = true
+
+theme.taglist_fg_focus = "#d0d0d0"
+theme.taglist_fg_empty = "#d0d0d0" .. "25"
+theme.taglist_bg_focus = "#2F92CF"
+theme.taglist_bg_occupied = "#2f2f2f"
+theme.taglist_bg_empty = "#2f2f2f"
+theme.taglist_bg_urgent = "#ac4142"
+
+theme.bg_systray = "#2f2f2f"
+theme.systray_icon_spacing = 8
+
+theme.useless_gap = dpi(8)
+theme.border_width = dpi(4)
+theme.border_color_normal = "#151515"
+theme.border_color_active = "#2F92CF"
+theme.border_color_marked = "#151515"
+theme.tooltip_opacity = 0
+
+theme.battery = "#d0d0d0"
+theme.battery_green = "#00ff00"
+theme.battery_yellow = "#ffff00"
+theme.battery_red = "#ff0000"
+
+theme.wallpaper = gears.filesystem.get_configuration_dir() .. "theme/wallpaper.jpg"
+
+gears.wallpaper.maximized(theme.wallpaper)
+
+return theme

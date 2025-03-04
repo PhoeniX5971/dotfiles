@@ -1,0 +1,24 @@
+# GTK Options
+
+gtk-titlebar = false
+gtk-tabs-location = hidden
+
+
+# Font 
+
+font-family = DM Mono
+font-family-bold = DM Mono
+font-synthetic-style = bold
+font-thicken = true
+font-size = 13
+
+# Style
+
+# background-opacity = 0.7
+cursor-style = bar
+window-padding-x = 12
+window-padding-y = 12
+
+# Keybinds
+
+keybind = ctrl+shift+l=toggle_tab_overview
