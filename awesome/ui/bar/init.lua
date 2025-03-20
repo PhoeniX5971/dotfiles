@@ -1,1 +1,1 @@
-require("ui.bar.top")
+require("ui.bar.left")

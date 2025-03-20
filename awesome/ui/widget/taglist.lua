@@ -25,11 +25,11 @@ local get_taglist = function(s)
 				client.focus:toggle_tag(t)
 			end
 		end),
-		awful.button({}, 4, function(t)
-			awful.tag.viewnext(t.screen)
+		awful.button({}, 4, function()
+			awful.tag.viewnext(s)
 		end),
-		awful.button({}, 5, function(t)
-			awful.tag.viewprev(t.screen)
+		awful.button({}, 5, function()
+			awful.tag.viewprev(s)
 		end)
 	)
 
@@ -39,68 +39,68 @@ local get_taglist = function(s)
 		filter = awful.widget.taglist.filter.all,
 		buttons = taglist_buttons,
 		layout = {
-			layout = wibox.layout.fixed.horizontal,
+			layout = wibox.layout.fixed.vertical, -- Vertical layout
 		},
 		widget_template = {
 			{
 				{
 					{
-						id = "text_role",
+						id = "icon_role",
 						align = "center",
 						valign = "center",
+						font = beautiful.icon_font or "DF Mono",
 						widget = wibox.widget.textbox,
 					},
 					widget = wibox.container.margin,
-					margins = dpi(2), -- Adjust margins for better sizing
+					margins = dpi(6),
 				},
 				id = "background_role",
 				widget = wibox.container.background,
-				forced_width = dpi(35),
-				forced_height = dpi(35),
+				forced_width = dpi(40),
+				forced_height = dpi(40),
 			},
-			shape = helpers.rrect(100), -- Apply circle shape here
 			widget = wibox.container.background,
-			create_callback = function(self, tag)
+			create_callback = function(self, tag, _, _)
+				local icon_widget = self:get_children_by_id("icon_role")[1]
+
 				self.update = function()
 					if tag.selected then
-						self.bg = beautiful.taglist_bg_focus
-						self.fg = beautiful.taglist_fg_focus
+						icon_widget.text = "" -- Focused
+						self.bg = beautiful.bg_focus
+						self.fg = beautiful.fg or "#eff7ff"
 					elseif #tag:clients() > 0 then
-						self.bg = beautiful.taglist_bg_occupied or beautiful.bg_focus
-						self.fg = beautiful.taglist_fg_occupied
+						icon_widget.text = "" -- Occupied
+						self.bg = beautiful.bg_focus or "#262b4b"
+						self.fg = beautiful.fg_alt or "#91b5d1"
 					else
-						self.bg = beautiful.taglist_bg_empty or beautiful.bg_focus
-						self.fg = beautiful.taglist_fg_empty
+						icon_widget.text = "" -- Empty
+						self.bg = beautiful.bg_focus
+						self.fg = beautiful.fg_alt or "#91b5d1"
 					end
 				end
+
 				self.update()
 				tag:connect_signal("property::selected", self.update)
 				tag:connect_signal("property::urgent", self.update)
 				tag:connect_signal("tagged", self.update)
 				tag:connect_signal("untagged", self.update)
 			end,
-			update_callback = function(self)
+			update_callback = function(self, tag)
 				self.update()
 			end,
 		},
 	})
 
-	-- Outer container to create space around the taglist
+	-- Outer container for styling
 	local taglist_widget = wibox.widget({
 		{
-			{
-				taglist,
-				margins = {
-					left = 1,
-					right = 1,
-				},
-				widget = wibox.container.margin,
-			},
-			bg = beautiful.bg_focus, -- Background color for the container
-			shape = helpers.rrect(100), -- Round the container edges
-			widget = wibox.container.background,
+			taglist,
+			margins = dpi(4),
+			widget = wibox.container.margin,
 		},
-		layout = wibox.layout.align.horizontal, -- Keeps the layout consistent
+		bg = beautiful.bg_focus,
+		shape = helpers.rrect(6), -- Slight rounded edges
+		widget = wibox.container.background,
 	})
 
 	return taglist_widget

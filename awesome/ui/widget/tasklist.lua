@@ -21,8 +21,8 @@ local function rounded_tasklist(s)
 		filter = awful.widget.tasklist.filter.alltags, -- Show all clients, not just current workspace
 		buttons = tasklist_buttons,
 		layout = {
-			spacing = 8,
-			layout = wibox.layout.fixed.horizontal,
+			spacing = 2,
+			layout = wibox.layout.fixed.vertical,
 		},
 		widget_template = {
 			{
@@ -34,22 +34,25 @@ local function rounded_tasklist(s)
 		},
 	})
 
+	-- Apply rounded corners and background
 	local tasklist_widget = wibox.widget({
 		{
 			tasklist,
 			margins = 4,
 			widget = wibox.container.margin,
 		},
-		bg = beautiful.bg_focus,
-		shape = helpers.rrect(100),
+		bg = beautiful.bg_focus, -- Set to your theme's normal background color
+		shape = helpers.rrect(6), -- Rounded corners for the tasklist widget
 		widget = wibox.container.background,
 	})
 
+	-- If there are no visible tasks, hide the tasklist widget
 	if awful.widget.tasklist.filter.alltags == 0 then
 		tasklist_widget.visible = false
 	elseif tasklist.count > 0 then
 		tasklist_widget.visible = false
 	end
+
 	return tasklist_widget
 end
 

@@ -1,8 +1,8 @@
 {
-  "custom-color": "#33B1FF",
+  "custom-color": "none",
   "swww-anim": "wipe",
   "color-scheme": "dark",
-  "generation-scheme": "rainbow",
+  "generation-scheme": "monochrome",
   "wallpaper-engine": "swww",
   "hyprpaper-tpl": "preload = WALLPAPER\n  wallpaper = ,WALLPAPER\n splash = false"
 }

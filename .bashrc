@@ -35,3 +35,6 @@ done
 if [ -f ~/.bashrc_custom ] ;then
     source ~/.bashrc_custom
 fi
+
+# Created by `pipx` on 2025-03-09 17:21:41
+export PATH="$PATH:/home/phoenix/.local/bin"
