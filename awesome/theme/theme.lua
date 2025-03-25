@@ -39,7 +39,7 @@ theme.border_width = dpi(4)
 theme.border_color_normal = "#1b1633"
 theme.border_color_active = "#6A64D4"
 theme.border_color_marked = "#1b1633"
-theme.tooltip_opacity = 1
+theme.tooltip_opacity = 0
 
 theme.battery = "#c6c6ea"
 theme.battery_green = "#00ff00"
