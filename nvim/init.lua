@@ -1,12 +1,20 @@
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
 
+require("catppuccin").setup({
+    options = {
+        transparent = false, -- Disables transparency
+    },
+})
+
+vim.cmd("colorscheme catppuccin-mocha") -- Apply the Carbonfox theme
+
 -- Set background to solid color
-vim.cmd([[colorscheme carbonfox]])
+-- vim.cmd([[colorscheme carbonfox]])
 
 -- -- Code to use terminal colors
 -- vim.opt.termguicolors = false
--- vim.opt.background = "dark"
+vim.opt.background = "dark"
 -- vim.cmd("colorscheme default")
 
 -- Set Indentation

@@ -17,14 +17,8 @@ end)
 -- General keybinds
 awful.keyboard.append_global_keybindings({
 	-- Awesome keybinds
-	awful.key({ modkey }, "k", hotkeys_popup.show_help, { description = "show keybinds", group = "awesome" }),
+	awful.key({ modkey }, "F1", hotkeys_popup.show_help, { description = "show keybinds", group = "awesome" }),
 	awful.key({ modkey, "Shift" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
-	awful.key({ modkey }, "Tab", function()
-		awful.client.focus.byidx(1)
-	end, { description = "next window", group = "awesome" }),
-	awful.key({ modkey, "Shift" }, "Tab", function()
-		awful.client.focus.byidx(-1)
-	end, { description = "previous window", group = "awesome" }),
 	awful.key({ modkey }, "Return", function()
 		awful.spawn.with_shell(terminal)
 	end, { description = "run terminal", group = "awesome" }),
@@ -134,5 +128,73 @@ client.connect_signal("request::default_keybindings", function()
 		awful.key({ modkey }, "q", function(c)
 			c:kill()
 		end, { description = "close", group = "client" }),
+
+		-- Client Manipulation
+
+		-- Move client to direction
+
+		awful.key({ modkey, "Shift" }, "h", function()
+			awful.client.swap.bydirection("left")
+		end, { description = "swap client left", group = "client" }),
+
+		awful.key({ modkey, "Shift" }, "l", function()
+			awful.client.swap.bydirection("right")
+		end, { description = "swap client right", group = "client" }),
+
+		awful.key({ modkey, "Shift" }, "k", function()
+			awful.client.swap.bydirection("up")
+		end, { description = "swap client up", group = "client" }),
+
+		awful.key({ modkey, "Shift" }, "j", function()
+			awful.client.swap.bydirection("down")
+		end, { description = "swap client down", group = "client" }),
+
+		-- Navigate through clients
+
+		awful.key({ modkey }, "h", function()
+			awful.client.focus.bydirection("left")
+		end, { description = "focus left", group = "client" }),
+
+		awful.key({ modkey }, "l", function()
+			awful.client.focus.bydirection("right")
+		end, { description = "focus right", group = "client" }),
+
+		awful.key({ modkey }, "k", function()
+			awful.client.focus.bydirection("up")
+		end, { description = "focus up", group = "client" }),
+
+		awful.key({ modkey }, "j", function()
+			awful.client.focus.bydirection("down")
+		end, { description = "focus down", group = "client" }),
+
+		-- Resize client
+
+		-- Increase master width (expand master area)
+		awful.key({ modkey, "Control" }, "l", function()
+			awful.tag.incmwfact(0.05)
+		end, { description = "increase master width", group = "layout" }),
+
+		-- Decrease master width (shrink master area)
+		awful.key({ modkey, "Control" }, "h", function()
+			awful.tag.incmwfact(-0.05)
+		end, { description = "decrease master width", group = "layout" }),
+
+		-- Increase client height in stack
+		awful.key({ modkey, "Control" }, "j", function()
+			awful.client.incwfact(0.05)
+		end, { description = "increase client height", group = "layout" }),
+
+		-- Decrease client height in stack
+		awful.key({ modkey, "Control" }, "k", function()
+			awful.client.incwfact(-0.05)
+		end, { description = "decrease client height", group = "layout" }),
+
+		awful.key({ modkey }, "Tab", function()
+			awful.layout.inc(1)
+		end, { description = "select next layout", group = "layout" }),
+
+		awful.key({ modkey, "Shift" }, "Tab", function()
+			awful.layout.inc(-1)
+		end, { description = "select previous layout", group = "layout" }),
 	})
 end)

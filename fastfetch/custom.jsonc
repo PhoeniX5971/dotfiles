@@ -2,16 +2,16 @@
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
   "logo": {
     // Oxocarbon
-    // "source": "$HOME/Pictures/mikuchibi-noback.png",
+    // "source": "$HOME/Pictures/char/mikuchibi-noback.png",
     // "height": 15,
 
     // Purple
-    // "source": "$HOME/Pictures/eepy-girl-purple-noback.png",
-    // "height": 15,
+    "source": "$HOME/Pictures/char/eepy-girl-purple-noback.png",
+    "height": 15,
 
     // Blue
-    "source": "$HOME/Pictures/chibi-pc-girl-removebg-preview.png",
-    "height": 15,
+    // "source": "$HOME/Pictures/char/chibi-pc-girl-removebg-preview.png",
+    // "height": 15,
 
     "padding": {
       "top": 0,

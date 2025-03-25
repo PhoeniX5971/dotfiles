@@ -1,90 +1,121 @@
 #!/bin/bash
 
-# Paths to the necessary files
-COLOR_FILE="$HOME/.cache/material/colors.json"
+# Paths
 THEME_FILE="$HOME/.config/awesome/theme/theme.lua"
+WAL_COLORS="$HOME/.cache/wal/colors.sh"
 
-# Check if the color file exists
-if [ ! -f "$COLOR_FILE" ]; then
-	echo "Color file does not exist: $COLOR_FILE"
+# Ensure the Pywal colors file exists
+if [ ! -f "$WAL_COLORS" ]; then
+	echo "Pywal colors file not found: $WAL_COLORS"
 	exit 1
 fi
 
-# Extract colors from the JSON file
-declare -A colors
-while read -r key value; do
-	colors[$key]=$value
-done < <(jq -r '.colors | to_entries[] | "\(.key) \(.value)"' "$COLOR_FILE")
+# Source Pywal colors
+source "$WAL_COLORS"
 
-# Function to lighten a color
-lighten_color() {
-	local color="$1"
-	local amount="$2"
-	printf "#%02x%02x%02x" \
-		$(((0x${color:1:2} + amount > 255) ? 255 : (0x${color:1:2} + amount))) \
-		$(((0x${color:3:2} + amount > 255) ? 255 : (0x${color:3:2} + amount))) \
-		$(((0x${color:5:2} + amount > 255) ? 255 : (0x${color:5:2} + amount)))
-}
+# Assign Pywal colors to theme variables
+bg_normal="$background"
+bg_focus="$color1"
+bg_urgent="$color2"
 
-# Update colors in the theme file
-tmpfile=$(mktemp)
+fg_normal="$foreground"
+fg_focus="$color5"
+fg_urgent="$color1"
 
-while IFS= read -r line; do
-	if [[ $line =~ theme\.bg_normal ]]; then
-		normal_color="${colors[background]}"
-		focus_color=$(lighten_color "${colors[background]}" 30)
-		echo "theme.bg_normal = \"${normal_color}\"" >>"$tmpfile"
-		echo "theme.bg_focus = \"${focus_color}\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.bg_focus ]]; then
-		# Skip this line as bg_focus will be handled in bg_normal block
-		continue
-	elif [[ $line =~ theme\.bg_urgent ]]; then
-		echo "theme.bg_urgent = \"${colors[error]}\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.fg_normal ]]; then
-		echo "theme.fg_normal = \"${colors[onBackground]}\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.fg_focus ]]; then
-		echo "theme.fg_focus = \"${colors[onSurface]}\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.fg_urgent ]]; then
-		echo "theme.fg_urgent = \"${colors[onError]}\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.tasklist_bg_focus ]]; then
-		echo "theme.tasklist_bg_focus = \"${focus_color}\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.tasklist_bg_urgent ]]; then
-		echo "theme.tasklist_bg_urgent = \"${focus_color}\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.tasklist_fg_normal ]]; then
-		echo "theme.tasklist_fg_normal = \"${colors[onBackground]}25\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.tasklist_fg_focus ]]; then
-		echo "theme.tasklist_fg_focus = \"${colors[onBackground]}\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.tasklist_fg_urgent ]]; then
-		echo "theme.tasklist_fg_urgent = \"${colors[error]}\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.tasklist_fg_minimize ]]; then
-		echo "theme.tasklist_fg_minimize = \"${colors[onBackground]}25\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.taglist_fg_focus ]]; then
-		echo "theme.taglist_fg_focus = \"${colors[onBackground]}\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.taglist_fg_empty ]]; then
-		echo "theme.taglist_fg_empty = \"${colors[onBackground]}25\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.taglist_bg_focus ]]; then
-		echo "theme.taglist_bg_focus = \"${colors[secondary_paletteKeyColor]}\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.taglist_bg_occupied ]]; then
-		echo "theme.taglist_bg_occupied = \"${focus_color}\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.taglist_bg_empty ]]; then
-		echo "theme.taglist_bg_empty = \"${focus_color}\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.taglist_bg_urgent ]]; then
-		echo "theme.taglist_bg_urgent = \"${colors[error]}\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.bg_systray ]]; then
-		echo "theme.bg_systray = \"${focus_color}\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.border_color_normal ]]; then
-		echo "theme.border_color_normal = \"${colors[background]}\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.border_color_active ]]; then
-		echo "theme.border_color_active = \"${colors[primary]}\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.border_color_marked ]]; then
-		echo "theme.border_color_marked = \"${colors[background]}\"" >>"$tmpfile"
-	elif [[ $line =~ theme\.battery ]]; then
-		echo "theme.battery = \"${colors[onBackground]}\"" >>"$tmpfile"
-	else
-		echo "$line" >>"$tmpfile"
-	fi
-done <"$THEME_FILE"
+tasklist_fg_normal="${foreground}25"
+tasklist_fg_focus="$foreground"
+tasklist_fg_urgent="$color3"
 
-mv "$tmpfile" "$THEME_FILE"
+taglist_fg_empty="${foreground}25"
+taglist_fg_focus="$fg_focus"
+taglist_fg_occupied="$fg_normal"
+taglist_fg_urgent="$fg_urgent"
+taglist_bg_focus="#00000000"    # Transparent background for taglist focus
+taglist_bg_occupied="#00000000" # Transparent background for taglist occupied
+taglist_bg_empty="#00000000"    # Transparent background for taglist empty
+taglist_bg_urgent="$color3"     # Keep taglist urgent background as normal
 
-echo "Colors updated in theme.lua"
+border_color_active="$color2"
+
+# Write new theme.lua
+cat >"$THEME_FILE" <<EOF
+local gears = require("gears")
+local dpi = require("beautiful").xresources.apply_dpi
+
+local theme = {}
+
+theme.font = "DM Mono Bold 14"
+
+theme.bg_normal = "$bg_normal"
+theme.bg_focus = "$bg_focus"
+theme.bg_urgent = "$bg_urgent"
+
+theme.fg_normal = "$fg_normal"
+theme.fg_focus = "$fg_focus"
+theme.fg_urgent = "$fg_urgent"
+
+theme.tasklist_bg_focus = "$bg_normal"
+theme.tasklist_bg_urgent = "$bg_normal"
+theme.tasklist_fg_normal = "$tasklist_fg_normal"
+theme.tasklist_fg_focus = "$tasklist_fg_focus"
+theme.tasklist_fg_urgent = "$tasklist_fg_urgent"
+theme.tasklist_fg_minimize = "$tasklist_fg_normal"
+theme.tasklist_font_minimized = "JetBrains Mono NF Italic Bold 13"
+theme.tasklist_plain_task_name = true
+
+theme.taglist_fg_focus = "$taglist_fg_focus"
+theme.taglist_fg_empty = "$taglist_fg_empty"
+theme.taglist_fg_occupied = "$taglist_fg_occupied"
+theme.taglist_fg_urgent = "$taglist_fg_urgent"
+theme.taglist_bg_focus = "$taglist_bg_focus"
+theme.taglist_bg_occupied = "$taglist_bg_occupied"
+theme.taglist_bg_empty = "$taglist_bg_empty"
+theme.taglist_bg_urgent = "$taglist_bg_urgent"
+
+theme.bg_systray = "$bg_focus"
+theme.systray_icon_spacing = 8
+
+theme.useless_gap = dpi(8)
+theme.border_width = dpi(4)
+theme.border_color_normal = "$bg_normal"
+theme.border_color_active = "$border_color_active"
+theme.border_color_marked = "$bg_normal"
+theme.tooltip_opacity = 0
+
+theme.battery = "$fg_normal"
+theme.battery_green = "#00ff00"
+theme.battery_yellow = "#ffff00"
+theme.battery_red = "#ff0000"
+
+theme.hotkeys_font = "DM Mono 14"
+theme.hotkeys_description_font = "DM Mono 12"
+
+theme.layout_fairh = gears.filesystem.get_configuration_dir() .. "themes/default/layouts/fairhw.png"
+theme.layout_fairv = gears.filesystem.get_configuration_dir() .. "themes/default/layouts/fairvw.png"
+theme.layout_floating = gears.filesystem.get_configuration_dir() .. "themes/default/layouts/floatingw.png"
+theme.layout_magnifier = gears.filesystem.get_configuration_dir() .. "themes/default/layouts/magnifierw.png"
+theme.layout_max = gears.filesystem.get_configuration_dir() .. "themes/default/layouts/maxw.png"
+theme.layout_fullscreen = gears.filesystem.get_configuration_dir() .. "themes/default/layouts/fullscreenw.png"
+theme.layout_tilebottom = gears.filesystem.get_configuration_dir() .. "themes/default/layouts/tilebottomw.png"
+theme.layout_tileleft = gears.filesystem.get_configuration_dir() .. "themes/default/layouts/tileleftw.png"
+theme.layout_tile = gears.filesystem.get_configuration_dir() .. "themes/default/layouts/tilew.png"
+theme.layout_tiletop = gears.filesystem.get_configuration_dir() .. "themes/default/layouts/tiletopw.png"
+theme.layout_spiral = gears.filesystem.get_configuration_dir() .. "themes/default/layouts/spiralw.png"
+theme.layout_dwindle = gears.filesystem.get_configuration_dir() .. "themes/default/layouts/dwindlew.png"
+theme.layout_cornernw = gears.filesystem.get_configuration_dir() .. "themes/default/layouts/cornernww.png"
+theme.layout_cornerne = gears.filesystem.get_configuration_dir() .. "themes/default/layouts/cornernew.png"
+theme.layout_cornersw = gears.filesystem.get_configuration_dir() .. "themes/default/layouts/cornersww.png"
+theme.layout_cornerse = gears.filesystem.get_configuration_dir() .. "themes/default/layouts/cornersew.png"
+theme.layout_grid = gears.filesystem.get_configuration_dir() .. "themes/default/layouts/gridw.png"
+
+theme.wallpaper = gears.filesystem.get_configuration_dir() .. "theme/wallpaper.jpg"
+
+gears.wallpaper.maximized(theme.wallpaper)
+
+return theme
+EOF
+
+echo "Updated AwesomeWM theme with Pywal colors."
+
+# Restart AwesomeWM
+awesome-client 'awesome.restart()'

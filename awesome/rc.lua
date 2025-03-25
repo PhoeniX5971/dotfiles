@@ -28,6 +28,7 @@ require("bind")
 require("rule")
 require("ui")
 require("theme")
+require("autostart")
 
 --[[
 	Layouts:
@@ -36,8 +37,15 @@ require("theme")
 --]]
 tag.connect_signal("request::default_layouts", function()
 	awful.layout.append_default_layouts({
-		awful.layout.suit.tile,
-		awful.layout.suit.floating,
+		awful.layout.suit.tile, -- Default tiling (master on left, slaves on right)
+		awful.layout.suit.tile.left, -- Master on right, slaves on left
+		awful.layout.suit.tile.bottom, -- Master on top, slaves on bottom
+		awful.layout.suit.tile.top, -- Master on bottom, slaves on top
+		awful.layout.suit.fair, -- Fair layout (equal sizes, vertical)
+		awful.layout.suit.fair.horizontal, -- Fair layout (equal sizes, horizontal)
+		awful.layout.suit.spiral, -- Spiral layout (like Fibonacci)
+		awful.layout.suit.spiral.dwindle, -- Dwindling spiral (more compact)
+		awful.layout.suit.magnifier, -- Magnifier layout (big focused window)
 	})
 end)
 
@@ -73,8 +81,8 @@ client.connect_signal("manage", function(c)
 	end
 end)
 
--- client.connect_signal("manage", function(c)
--- 	c.shape = function(cr, w, h)
--- 		gears.shape.rounded_rect(cr, w, h, 15)
--- 	end
--- end)
+client.connect_signal("manage", function(c)
+	c.shape = function(cr, w, h)
+		gears.shape.rounded_rect(cr, w, h, 0)
+	end
+end)

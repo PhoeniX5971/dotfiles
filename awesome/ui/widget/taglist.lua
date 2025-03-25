@@ -65,17 +65,20 @@ local get_taglist = function(s)
 
 				self.update = function()
 					if tag.selected then
+						-- If the tag is selected (focused)
 						icon_widget.text = "" -- Focused
-						self.bg = beautiful.bg_focus
-						self.fg = beautiful.fg or "#eff7ff"
+						self.bg = beautiful.taglist_bg_focus -- Transparent background for focused
+						self.fg = beautiful.taglist_fg_focus -- Foreground color for focused
 					elseif #tag:clients() > 0 then
+						-- If the tag has clients (occupied)
 						icon_widget.text = "" -- Occupied
-						self.bg = beautiful.bg_focus or "#262b4b"
-						self.fg = beautiful.fg_alt or "#91b5d1"
+						self.bg = beautiful.taglist_bg_occupied -- Transparent background for occupied
+						self.fg = beautiful.taglist_fg_occupied -- Foreground color for occupied
 					else
+						-- If the tag is empty
 						icon_widget.text = "" -- Empty
-						self.bg = beautiful.bg_focus
-						self.fg = beautiful.fg_alt or "#91b5d1"
+						self.bg = beautiful.taglist_bg_empty -- Transparent background for empty
+						self.fg = beautiful.taglist_fg_empty -- Foreground color for empty
 					end
 				end
 

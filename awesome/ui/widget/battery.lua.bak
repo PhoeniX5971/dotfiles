@@ -1,0 +1,28 @@
+local wibox = require("wibox")
+local awful = require("awful")
+
+-- Function to create the battery widget
+local function battery_widget()
+	-- Create a textbox widget to display the battery percentage
+	local battery_text = wibox.widget.textbox()
+
+	-- Function to update the battery percentage
+	local function update_battery()
+		-- Read the battery percentage from the system file
+		awful.spawn.easy_async_with_shell("cat /sys/class/power_supply/BAT1/capacity", function(out)
+			-- Update the battery percentage in the textbox
+			battery_text.text = out
+		end)
+	end
+
+	-- Connect to the signal to update the battery on changes
+	awesome.connect_signal("battery", update_battery)
+
+	-- Initial battery update
+	update_battery()
+
+	return battery_text
+end
+
+-- Return the battery widget function
+return battery_widget
