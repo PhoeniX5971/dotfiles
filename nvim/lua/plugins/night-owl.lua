@@ -1,6 +1,6 @@
 return {
     {
-        "marko-cerovac/material.nvim", -- Example for Nightfox
+        "oxfist/night-owl.nvim", -- Example for Nightfox
         config = function()
             require("material").setup({
                 options = {

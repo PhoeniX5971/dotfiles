@@ -6,15 +6,20 @@
     // "height": 15,
 
     // Purple
-    "source": "$HOME/Pictures/char/eepy-girl-purple-noback.png",
-    "height": 15,
+    // "source": "$HOME/Pictures/char/eepy-girl-purple-noback.png",
+    // "height": 15,
+
+    // Pink
+    // "source": "$HOME/Pictures/char/boba-girl-purple-noback2.png",
+    // "height": 12,
 
     // Blue
-    // "source": "$HOME/Pictures/char/chibi-pc-girl-removebg-preview.png",
-    // "height": 15,
+    "source": "$HOME/Pictures/char/chibi-pc-girl-removebg-preview.png",
+    "height": 15,
 
     "padding": {
       "top": 0,
+      "left": 0,
     },
   },
   "display": {

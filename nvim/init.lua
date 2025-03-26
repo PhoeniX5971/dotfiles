@@ -1,13 +1,55 @@
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
 
-require("catppuccin").setup({
-    options = {
-        transparent = false, -- Disables transparency
-    },
-})
+-- require("nightfox").setup({
+--     options = {
+--         transparent = true, -- Ensure transparency is off
+--     },
+--     palettes = {
+--         carbonfox = {
+--             bg0 = "#040619", -- Background
+--             fg1 = "#e0cef3", -- Foreground
+--             blue = "#355BBF",
+--             cyan = "#2398E3",
+--             purple = "#9974E8",
+--             light_blue = "#698CEC",
+--         },
+--     },
+--     groups = {
+--         carbonfox = {
+--             Normal = { fg = "#e0cef3", bg = "#040619" },
+--             Comment = { fg = "#9c90aa" },
+--             Keyword = { fg = "#9974E8" },
+--             Identifier = { fg = "#5B6BDB" },
+--             Function = { fg = "#698CEC" },
+--             String = { fg = "#2398E3" },
+--             Type = { fg = "#9D99F2" },
+--         },
+--     },
+-- })
+--
+vim.cmd.colorscheme("oxocarbon") -- Apply the theme
 
-vim.cmd("colorscheme catppuccin-mocha") -- Apply the Carbonfox theme
+-- Make background transparent
+vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
+vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE" }) -- For inactive windows
+vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "NONE" }) -- Empty line markers
+vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE" }) -- Gutter (line numbers)
+vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "NONE" }) -- Transparency for Telescope
+vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "NONE" }) -- Transparent border
+
+vim.api.nvim_set_hl(0, "LineNr", { bg = "NONE" }) -- Line numbers
+vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "NONE" }) -- Current line number
+
+vim.api.nvim_set_hl(0, "WinSeparator", { bg = "NONE" }) -- Split borders
+vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" }) -- Status line
+vim.api.nvim_set_hl(0, "CursorLine", { bg = "NONE" }) -- Current line
+vim.api.nvim_set_hl(0, "VertSplit", { bg = "NONE" }) -- Vertical splits
+vim.api.nvim_set_hl(0, "Pmenu", { bg = "NONE" }) -- Popup menu (autocomplete)
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = "NONE" }) -- Floating window borders
+
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" }) -- Floating windows
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = "NONE" }) -- Borders of floating windows
 
 -- Set background to solid color
 -- vim.cmd([[colorscheme carbonfox]])
