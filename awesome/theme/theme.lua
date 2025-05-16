@@ -5,43 +5,43 @@ local theme = {}
 
 theme.font = "DM Mono Bold 14"
 
-theme.bg_normal = "#201f21"
-theme.bg_focus = "#5BABEB"
-theme.bg_urgent = "#5FCBFD"
+theme.bg_normal = "#0a0a0a"
+theme.bg_focus = "#778476"
+theme.bg_urgent = "#80877D"
 
-theme.fg_normal = "#dee8f1"
-theme.fg_focus = "#C2BAC8"
-theme.fg_urgent = "#5BABEB"
+theme.fg_normal = "#e4eae2"
+theme.fg_focus = "#BAC7BC"
+theme.fg_urgent = "#778476"
 
-theme.tasklist_bg_focus = "#201f21"
-theme.tasklist_bg_urgent = "#201f21"
-theme.tasklist_fg_normal = "#dee8f125"
-theme.tasklist_fg_focus = "#dee8f1"
-theme.tasklist_fg_urgent = "#9098A8"
-theme.tasklist_fg_minimize = "#dee8f125"
+theme.tasklist_bg_focus = "#0a0a0a"
+theme.tasklist_bg_urgent = "#0a0a0a"
+theme.tasklist_fg_normal = "#e4eae225"
+theme.tasklist_fg_focus = "#e4eae2"
+theme.tasklist_fg_urgent = "#778484"
+theme.tasklist_fg_minimize = "#e4eae225"
 theme.tasklist_font_minimized = "JetBrains Mono NF Italic Bold 13"
 theme.tasklist_plain_task_name = true
 
-theme.taglist_fg_focus = "#C2BAC8"
-theme.taglist_fg_empty = "#dee8f125"
-theme.taglist_fg_occupied = "#dee8f1"
-theme.taglist_fg_urgent = "#5BABEB"
+theme.taglist_fg_focus = "#BAC7BC"
+theme.taglist_fg_empty = "#e4eae225"
+theme.taglist_fg_occupied = "#e4eae2"
+theme.taglist_fg_urgent = "#778476"
 theme.taglist_bg_focus = "#00000000"
 theme.taglist_bg_occupied = "#00000000"
 theme.taglist_bg_empty = "#00000000"
-theme.taglist_bg_urgent = "#9098A8"
+theme.taglist_bg_urgent = "#778484"
 
-theme.bg_systray = "#5BABEB"
+theme.bg_systray = "#778476"
 theme.systray_icon_spacing = 8
 
 theme.useless_gap = dpi(8)
 theme.border_width = dpi(4)
-theme.border_color_normal = "#201f21"
-theme.border_color_active = "#5FCBFD"
-theme.border_color_marked = "#201f21"
+theme.border_color_normal = "#0a0a0a"
+theme.border_color_active = "#80877D"
+theme.border_color_marked = "#0a0a0a"
 theme.tooltip_opacity = 0
 
-theme.battery = "#dee8f1"
+theme.battery = "#e4eae2"
 theme.battery_green = "#00ff00"
 theme.battery_yellow = "#ffff00"
 theme.battery_red = "#ff0000"

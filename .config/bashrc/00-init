@@ -7,3 +7,6 @@
 # -----------------------------------------------------
 export EDITOR=nvim
 export PATH="/usr/lib/ccache/bin/:$PATH"
+export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
+export PATH=$JAVA_HOME/bin:$PATH
+export PYTHONPATH="$HOME/python-libs/transformers:$HOME/python-libs/sentence-transformers:$HOME/python-libs/tokenizers/bindings/python:$PYTHONPATH"
