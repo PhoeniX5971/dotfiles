@@ -10,3 +10,7 @@ export PATH="/usr/lib/ccache/bin/:$PATH"
 export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
 export PYTHONPATH="$HOME/python-libs/transformers:$HOME/python-libs/sentence-transformers:$HOME/python-libs/tokenizers/bindings/python:$PYTHONPATH"
+export OLLAMA_GPU_LAYERS=100
+export OLLAMA_NO_CUDA=0
+export GGML_GPU_LAYER=1
+export CUDA_VISIBLE_DEVICES=0
