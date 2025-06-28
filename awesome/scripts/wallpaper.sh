@@ -10,7 +10,7 @@ fi
 NEW_WALLPAPER="$1"
 THEME_DIR="$HOME/.config/awesome/theme"
 SCRIPT_DIR="$HOME/.config/awesome/scripts"
-DOTFILES_HYPR_DIR="$HOME/dotfiles/hypr"
+DOTFILES_HYPR_DIR="$HOME/.config/awesome"
 
 # Find the current wallpaper file (assumes a single wallpaper file exists)
 CURRENT_WALLPAPER=$(find "$THEME_DIR" -type f -name 'wallpaper.*')

@@ -70,9 +70,9 @@ vim.g.clangd_formatting_enabled = true
 vim.g.clangd_flags = { "--clang-tidy", "--style=google", "--tab-width=4", "--use-tab" }
 
 -- Ensure Clangd uses these settings
-vim.cmd([[
-  augroup ClangdFormatting
-    autocmd!
-    autocmd FileType c,cpp lua vim.lsp.buf.formatting_sync(nil, 1000)
-  augroup END
-]])
+-- vim.cmd([[
+--   augroup ClangdFormatting
+--     autocmd!
+--     autocmd FileType c,cpp lua vim.lsp.buf.formatting_sync(nil, 1000)
+--   augroup END
+-- ]])
