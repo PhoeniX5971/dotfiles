@@ -12,6 +12,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	local taglist = require("ui.widget.taglist")(s)
 	local tasklist = require("ui.widget.tasklist")
 	local battery = require("ui.widget.battery")
+	local systray = require("ui.widget.systray")
 
 	-- Layoutbox (used for switching layouts)
 	s.layouts = awful.widget.layoutbox({
@@ -41,28 +42,28 @@ screen.connect_signal("request::desktop_decoration", function(s)
 				expand = "none",
 				taglist, -- Create the taglist
 				{
+					systray.create(),
 					{
 						{
 							{
-
 								s.layouts,
-								battery, -- Battery widget
-								spacing = dpi(8),
-								layout = wibox.layout.fixed.vertical,
+								battery,
+								clock,
+								spacing = dpi(12),
+								layout = wibox.layout.fixed.vertical, -- Clock Box Layout
 							},
-							clock, -- Clock widget
-							spacing = dpi(12),
-							layout = wibox.layout.fixed.vertical,
+							margins = dpi(6),
+							widget = wibox.container.margin, -- Margin For Clock Box
 						},
-						margins = dpi(6),
-						widget = wibox.container.margin,
+						bg = beautiful.bg_focus,
+						forced_width = dpi(30),
+						shape = helpers.rrect(6),
+						widget = wibox.container.background, -- Clock Box Container Background
 					},
-					bg = beautiful.bg_focus, -- Background color when focused
-					forced_width = dpi(30), -- Forced width for the clock container
-					shape = helpers.rrect(6), -- Rounded corners for the clock widget
-					widget = wibox.container.background,
+					spacing = dpi(8),
+					layout = wibox.layout.fixed.vertical, -- Bottom Widgets
 				},
-				layout = wibox.layout.align.vertical, -- Align everything vertically
+				layout = wibox.layout.align.vertical, -- Entire bar
 			},
 			margins = dpi(2),
 			widget = wibox.container.margin, -- Apply margins to the overall container
