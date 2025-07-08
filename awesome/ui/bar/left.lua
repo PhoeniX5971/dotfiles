@@ -47,9 +47,15 @@ screen.connect_signal("request::desktop_decoration", function(s)
 						{
 							{
 								s.layouts,
-								battery,
+								{
+									battery,
+									margins = {
+										right = dpi(4), -- Margin for battery widget
+									},
+									widget = wibox.container.margin, -- Margin for battery widget
+								},
 								clock,
-								spacing = dpi(12),
+								spacing = dpi(6),
 								layout = wibox.layout.fixed.vertical, -- Clock Box Layout
 							},
 							margins = dpi(6),

@@ -1,26 +1,35 @@
-local lain = require("lain")
 local wibox = require("wibox")
-local helpers = require("helpers")
+local lain = require("lain")
 
--- Create the battery widget using lain
-local battery_widget = lain.widget.bat({
-	settings = function()
-		-- Convert bat_now.perc to a number to ensure it's numeric
-		local battery_percentage = tonumber(bat_now.perc) or 0 -- Default to 0 if conversion fails
-
-		-- Set text to display battery percentage
-		widget:set_text(battery_percentage .. "%")
-
-		-- You can also change the color based on battery status
-		if battery_percentage <= 20 then
-			widget:set_markup(helpers.colorize_text(battery_percentage .. "%", "#FF0000")) -- Red for low battery
-		elseif battery_percentage <= 50 then
-			widget:set_markup(helpers.colorize_text(battery_percentage .. "%", "#FFFF00")) -- Yellow for medium battery
-		else
-			widget:set_markup(helpers.colorize_text(battery_percentage .. "%", "#00FF00")) -- Green for normal battery
-		end
-	end,
+local battery_icon = wibox.widget({
+	align = "center",
+	valign = "center",
+	font = "Symbols Nerd Font 16",
+	widget = wibox.widget.textbox,
 })
 
--- Return the widget
-return battery_widget
+local battery = lain.widget.bat({
+	settings = function()
+		local icon
+		local perc = tonumber(bat_now.perc) or 0
+
+		if bat_now.status == "Charging" then
+			icon = "⚡"
+		elseif perc >= 90 then
+			icon = ""
+		elseif perc >= 60 then
+			icon = ""
+		elseif perc >= 30 then
+			icon = ""
+		elseif perc >= 10 then
+			icon = ""
+		else
+			icon = ""
+		end
+
+		widget:set_markup('<span font="Symbols Nerd Font 16">' .. icon .. "</span>")
+	end,
+	widget = battery_icon,
+})
+
+return battery

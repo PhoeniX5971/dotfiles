@@ -1,28 +1,25 @@
-local wibox = require("wibox")
-local awful = require("awful")
+local lain = require("lain")
+local helpers = require("helpers")
 
--- Function to create the battery widget
-local function battery_widget()
-	-- Create a textbox widget to display the battery percentage
-	local battery_text = wibox.widget.textbox()
+-- Create the battery widget using lain
+local battery_widget = lain.widget.bat({
+	settings = function()
+		-- Convert bat_now.perc to a number to ensure it's numeric
+		local battery_percentage = tonumber(bat_now.perc) or 0 -- Default to 0 if conversion fails
 
-	-- Function to update the battery percentage
-	local function update_battery()
-		-- Read the battery percentage from the system file
-		awful.spawn.easy_async_with_shell("cat /sys/class/power_supply/BAT1/capacity", function(out)
-			-- Update the battery percentage in the textbox
-			battery_text.text = out
-		end)
-	end
+		-- Set text to display battery percentage
+		widget:set_text(battery_percentage .. "%")
 
-	-- Connect to the signal to update the battery on changes
-	awesome.connect_signal("battery", update_battery)
+		-- You can also change the color based on battery status
+		if battery_percentage <= 20 then
+			widget:set_markup(helpers.colorize_text(battery_percentage .. "%", "#FF0000")) -- Red for low battery
+		elseif battery_percentage <= 50 then
+			widget:set_markup(helpers.colorize_text(battery_percentage .. "%", "#FFFF00")) -- Yellow for medium battery
+		else
+			widget:set_markup(helpers.colorize_text(battery_percentage .. "%", "#00FF00")) -- Green for normal battery
+		end
+	end,
+})
 
-	-- Initial battery update
-	update_battery()
-
-	return battery_text
-end
-
--- Return the battery widget function
+-- Return the widget
 return battery_widget
