@@ -41,10 +41,11 @@ border_color_active="$color2"
 cat >"$THEME_FILE" <<EOF
 local gears = require("gears")
 local dpi = require("beautiful").xresources.apply_dpi
+local config = require("config")
 
 local theme = {}
 
-theme.font = "DM Mono Bold 14"
+theme.font = "DM Mono Bold " .. 14 * config.dpi_multiplier
 
 theme.bg_normal = "$bg_normal"
 theme.bg_focus = "$bg_focus"
@@ -60,7 +61,7 @@ theme.tasklist_fg_normal = "$tasklist_fg_normal"
 theme.tasklist_fg_focus = "$tasklist_fg_focus"
 theme.tasklist_fg_urgent = "$tasklist_fg_urgent"
 theme.tasklist_fg_minimize = "$tasklist_fg_normal"
-theme.tasklist_font_minimized = "JetBrains Mono NF Italic Bold 13"
+theme.tasklist_font_minimized = "JetBrains Mono NF Italic Bold " .. 13 * config.dpi_multiplier
 theme.tasklist_plain_task_name = true
 
 theme.taglist_fg_focus = "$taglist_fg_focus"
@@ -73,10 +74,10 @@ theme.taglist_bg_empty = "$taglist_bg_empty"
 theme.taglist_bg_urgent = "$taglist_bg_urgent"
 
 theme.bg_systray = "$bg_focus"
-theme.systray_icon_spacing = 8
+theme.systray_icon_spacing = dpi(8) * config.dpi_multiplier
 
-theme.useless_gap = dpi(8)
-theme.border_width = dpi(4)
+theme.useless_gap = dpi(8) * config.dpi_multiplier
+theme.border_width = dpi(4) * config.dpi_multiplier
 theme.border_color_normal = "$bg_normal"
 theme.border_color_active = "$border_color_active"
 theme.border_color_marked = "$bg_normal"
@@ -87,8 +88,8 @@ theme.battery_green = "#00ff00"
 theme.battery_yellow = "#ffff00"
 theme.battery_red = "#ff0000"
 
-theme.hotkeys_font = "DM Mono 14"
-theme.hotkeys_description_font = "DM Mono 12"
+theme.hotkeys_font = "DM Mono " .. 14 * config.dpi_multiplier
+theme.hotkeys_description_font = "DM Mono " .. 12 * config.dpi_multiplier
 
 theme.layout_fairh = gears.filesystem.get_configuration_dir() .. "theme/default/layouts/fairhw.png"
 theme.layout_fairv = gears.filesystem.get_configuration_dir() .. "theme/default/layouts/fairvw.png"
