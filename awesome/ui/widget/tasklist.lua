@@ -3,6 +3,8 @@ local gears = require("gears")
 local wibox = require("wibox")
 local helpers = require("helpers")
 local beautiful = require("beautiful")
+local dpi = beautiful.xresources.apply_dpi
+local config = require("config")
 
 -- Function that returns the tasklist widget with rounded corners
 local function rounded_tasklist(s)
@@ -12,24 +14,25 @@ local function rounded_tasklist(s)
 			c:jump_to()
 		end),
 		awful.button({}, 3, function()
-			awful.menu.client_list({ theme = { width = 250 } })
+			awful.menu.client_list({ theme = { width = dpi(250) * config.dpi_multiplier } })
 		end)
 	)
 
 	local tasklist = awful.widget.tasklist({
 		screen = s,
-		filter = awful.widget.tasklist.filter.alltags, -- Show all clients, not just current workspace
+		filter = awful.widget.tasklist.filter.alltags,
 		buttons = tasklist_buttons,
 		layout = {
-			spacing = 2,
-			layout = wibox.layout.fixed.vertical,
+			spacing = dpi(2) * config.dpi_multiplier,
+			layout = (config.placement == "left" or config.placement == "right") and wibox.layout.fixed.vertical
+				or wibox.layout.fixed.horizontal,
 		},
 		widget_template = {
 			{
 				id = "clienticon",
 				widget = awful.widget.clienticon,
 			},
-			margins = 2,
+			margins = dpi(2) * config.dpi_multiplier,
 			widget = wibox.container.margin,
 		},
 	})
@@ -38,20 +41,13 @@ local function rounded_tasklist(s)
 	local tasklist_widget = wibox.widget({
 		{
 			tasklist,
-			margins = 4,
+			margins = dpi(4) * config.dpi_multiplier,
 			widget = wibox.container.margin,
 		},
 		bg = beautiful.bg_focus, -- Set to your theme's normal background color
-		shape = helpers.rrect(6), -- Rounded corners for the tasklist widget
+		shape = helpers.rrect(dpi(6) * config.dpi_multiplier), -- Rounded corners for the tasklist widget
 		widget = wibox.container.background,
 	})
-
-	-- If there are no visible tasks, hide the tasklist widget
-	if awful.widget.tasklist.filter.alltags == 0 then
-		tasklist_widget.visible = false
-	elseif tasklist.count > 0 then
-		tasklist_widget.visible = false
-	end
 
 	return tasklist_widget
 end

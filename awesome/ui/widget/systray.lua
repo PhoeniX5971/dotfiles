@@ -2,6 +2,7 @@ local wibox = require("wibox")
 local helpers = require("helpers")
 local beautiful = require("beautiful")
 local config = require("config")
+local dpi = beautiful.xresources.apply_dpi
 
 -- Function that returns the systray widget with rounded corners
 local function rounded_systray()
@@ -21,7 +22,7 @@ local function rounded_systray()
 			widget = wibox.container.margin,
 		},
 		bg = beautiful.bg_focus,
-		shape = helpers.rrect(6), -- Apply rounded corners to the systray
+		shape = helpers.rrect(dpi(6) * config.dpi_multiplier), -- Apply rounded corners to the systray
 		widget = wibox.container.background,
 	})
 

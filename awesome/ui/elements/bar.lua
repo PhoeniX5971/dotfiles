@@ -33,7 +33,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			{
 				{
 					tasklist.create(s), -- Create the tasklist
-					spacing = dpi(4),
+					spacing = dpi(4) * config.dpi_multiplier,
 					layout = (config.placement == "left" or config.placement == "right")
 							and wibox.layout.fixed.vertical
 						or wibox.layout.fixed.horizontal,
@@ -49,24 +49,24 @@ screen.connect_signal("request::desktop_decoration", function(s)
 								{
 									battery,
 									margins = {
-										right = dpi(4), -- Margin for battery widget
+										right = dpi(4) * config.dpi_multiplier, -- Margin for battery widget
 									},
 									widget = wibox.container.margin, -- Margin for battery widget
 								},
 								clock,
-								spacing = dpi(6),
+								spacing = dpi(6) * config.dpi_multiplier, -- Spacing between widgets
 								layout = (config.placement == "left" or config.placement == "right")
 										and wibox.layout.fixed.vertical
 									or wibox.layout.fixed.horizontal,
 							},
-							margins = dpi(6),
+							margins = dpi(6) * config.dpi_multiplier,
 							widget = wibox.container.margin, -- Margin For Clock Box
 						},
 						bg = beautiful.bg_focus,
-						shape = helpers.rrect(6),
+						shape = helpers.rrect(dpi(6) * config.dpi_multiplier),
 						widget = wibox.container.background, -- Clock Box Container Background
 					},
-					spacing = dpi(8),
+					spacing = dpi(8) * config.dpi_multiplier,
 					layout = (config.placement == "left" or config.placement == "right")
 							and wibox.layout.fixed.vertical
 						or wibox.layout.fixed.horizontal,
@@ -74,15 +74,15 @@ screen.connect_signal("request::desktop_decoration", function(s)
 				layout = (config.placement == "left" or config.placement == "right") and wibox.layout.align.vertical
 					or wibox.layout.align.horizontal,
 			},
-			margins = dpi(2),
+			margins = dpi(2) * config.dpi_multiplier,
 			widget = wibox.container.margin, -- Apply margins to the overall container
 		},
 	})
 
 	if config.placement == "left" or config.placement == "right" then
-		s.wibar.width = dpi(45) -- Set width for vertical placement
+		s.wibar.width = dpi(45) * config.dpi_multiplier -- Set width for vertical placement
 	else
-		s.wibar.height = dpi(45) -- Set height for horizontal placement
+		s.wibar.height = dpi(45) * config.dpi_multiplier -- Set height for horizontal placement
 	end
 
 	-- Set the wibar background and shape

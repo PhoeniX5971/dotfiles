@@ -1,10 +1,11 @@
 local wibox = require("wibox")
 local lain = require("lain")
+local config = require("config")
 
 local battery_icon = wibox.widget({
 	align = "center",
 	valign = "center",
-	font = "Symbols Nerd Font 16",
+	font = "Symbols Nerd Font " .. 16 * config.dpi_multiplier,
 	widget = wibox.widget.textbox,
 })
 
@@ -27,7 +28,7 @@ local battery = lain.widget.bat({
 			icon = ""
 		end
 
-		widget:set_markup('<span font="Symbols Nerd Font 16">' .. icon .. "</span>")
+		widget:set_markup('<span font="Symbols Nerd Font ' .. 16 * config.dpi_multiplier .. ' ">' .. icon .. "</span>")
 	end,
 	widget = battery_icon,
 })

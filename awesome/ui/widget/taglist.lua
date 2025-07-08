@@ -52,12 +52,12 @@ local get_taglist = function(s)
 						widget = wibox.widget.textbox,
 					},
 					widget = wibox.container.margin,
-					margins = dpi(6),
+					margins = dpi(6) * config.dpi_multiplier, -- Margin for the icon
 				},
 				id = "background_role",
 				widget = wibox.container.background,
-				forced_width = dpi(40),
-				forced_height = dpi(40),
+				forced_width = dpi(40) * config.dpi_multiplier,
+				forced_height = dpi(40) * config.dpi_multiplier,
 			},
 			widget = wibox.container.background,
 			create_callback = function(self, tag, _, _)
@@ -98,11 +98,11 @@ local get_taglist = function(s)
 	local taglist_widget = wibox.widget({
 		{
 			taglist,
-			margins = dpi(4),
+			margins = dpi(4) * config.dpi_multiplier,
 			widget = wibox.container.margin,
 		},
 		bg = beautiful.bg_focus,
-		shape = helpers.rrect(6), -- Slight rounded edges
+		shape = helpers.rrect(dpi(6) * config.dpi_multiplier), -- Slight rounded edges
 		widget = wibox.container.background,
 	})
 
