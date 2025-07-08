@@ -26,10 +26,10 @@ terminal = "kitty"
 modkey = "Mod4"
 
 -- Load files
+require("theme")
 require("bind")
 require("rule")
 require("ui")
-require("theme")
 require("autostart")
 
 --[[

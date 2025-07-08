@@ -1,6 +1,7 @@
--- ~/.config/awesome/bind.lua
 local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup")
+local volume_osd = require("ui.element.osd.volume")
+local brightness_osd = require("ui.element.osd.brightness")
 
 -- Mouse
 client.connect_signal("request::default_mousebindings", function()
@@ -39,9 +40,6 @@ awful.keyboard.append_global_keybindings({
 	end, { description = "rofi runner", group = "awesome" }),
 
 	--Media keybinds
-	awful.key({}, "XF86AudioMute", function()
-		awful.util.spawn("pamixer -t")
-	end),
 	awful.key({}, "XF86AudioNext", function()
 		awful.util.spawn("playerctl next")
 	end),
@@ -55,17 +53,34 @@ awful.keyboard.append_global_keybindings({
 		awful.util.spawn("playerctl previous")
 	end),
 	awful.key({}, "XF86AudioLowerVolume", function()
-		awful.util.spawn("pamixer --decrease 5")
-	end),
+		awful.spawn.easy_async_with_shell("pamixer --decrease 5 && sleep 0.05", function()
+			volume_osd.update()
+		end)
+	end, { description = "lower volume", group = "media" }),
+
 	awful.key({}, "XF86AudioRaiseVolume", function()
-		awful.util.spawn("pamixer --increase 5")
-	end),
+		awful.spawn.easy_async_with_shell("pamixer --increase 5 && sleep 0.05", function()
+			volume_osd.update()
+		end)
+	end, { description = "raise volume", group = "media" }),
+
+	awful.key({}, "XF86AudioMute", function()
+		awful.spawn.easy_async_with_shell("pamixer -t && sleep 0.05", function()
+			volume_osd.update()
+		end)
+	end, { description = "toggle mute", group = "media" }),
+
 	awful.key({}, "XF86MonBrightnessUp", function()
-		awful.util.spawn("brightnessctl set +5%")
-	end),
+		awful.spawn.easy_async_with_shell("brightnessctl set +5% && sleep 0.05", function()
+			brightness_osd.update()
+		end)
+	end, { description = "increase brightness", group = "media" }),
+
 	awful.key({}, "XF86MonBrightnessDown", function()
-		awful.util.spawn("brightnessctl set 5%-")
-	end),
+		awful.spawn.easy_async_with_shell("brightnessctl set 5%- && sleep 0.05", function()
+			brightness_osd.update()
+		end)
+	end, { description = "decrease brightness", group = "media" }),
 
 	-- Tag keybinds
 	awful.key({
