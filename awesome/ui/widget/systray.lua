@@ -1,14 +1,17 @@
-local awful = require("awful")
-local gears = require("gears")
 local wibox = require("wibox")
 local helpers = require("helpers")
 local beautiful = require("beautiful")
+local config = require("config")
 
 -- Function that returns the systray widget with rounded corners
 local function rounded_systray()
 	-- Create the systray widget
 	local systray = wibox.widget.systray()
-	systray.horizontal = false
+	if config.placement == "left" or config.placement == "right" then
+		systray.horizontal = false
+	else
+		systray.horizontal = true
+	end
 
 	-- Apply styling to the systray icons to make them look similar to the tasklist
 	local systray_widget = wibox.widget({

@@ -4,6 +4,7 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local dpi = require("beautiful.xresources").apply_dpi
 local helpers = require("helpers")
+local config = require("config")
 
 -- default modkey
 local modkey = "Mod4"
@@ -38,9 +39,8 @@ local get_taglist = function(s)
 		screen = s,
 		filter = awful.widget.taglist.filter.all,
 		buttons = taglist_buttons,
-		layout = {
-			layout = wibox.layout.fixed.vertical, -- Vertical layout
-		},
+		layout = (config.placement == "left" or config.placement == "right") and wibox.layout.fixed.vertical
+			or wibox.layout.fixed.horizontal,
 		widget_template = {
 			{
 				{

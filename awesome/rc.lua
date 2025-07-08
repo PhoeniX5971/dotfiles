@@ -3,6 +3,8 @@
 local awful = require("awful")
 local gears = require("gears")
 local naughty = require("naughty")
+local beautiful = require("beautiful")
+local dpi = beautiful.xresources.apply_dpi
 require("awful.autofocus")
 
 --[[
@@ -83,6 +85,6 @@ end)
 
 client.connect_signal("manage", function(c)
 	c.shape = function(cr, w, h)
-		gears.shape.rounded_rect(cr, w, h, 0)
+		gears.shape.rounded_rect(cr, w, h, dpi(8)) -- Apply rounded corners to clients
 	end
 end)

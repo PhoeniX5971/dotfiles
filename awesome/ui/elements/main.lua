@@ -2,19 +2,18 @@ local wibox = require("wibox")
 local awful = require("awful")
 local beautiful = require("beautiful")
 local helpers = require("helpers")
-local gears = require("gears")
+local config = require("config")
 local dpi = beautiful.xresources.apply_dpi
 
-local clock = wibox.widget.textclock("%I\n%M\n%p")
+local clock = (config.placement == "left" or config.placement == "right") and wibox.widget.textclock("%I\n%M\n%p")
+	or wibox.widget.textclock("%I:%M %p")
 
 screen.connect_signal("request::desktop_decoration", function(s)
-	-- Create taglist and tasklist
 	local taglist = require("ui.widget.taglist")(s)
 	local tasklist = require("ui.widget.tasklist")
-	local battery = require("ui.widget.battery")
 	local systray = require("ui.widget.systray")
+	local battery = require("ui.widget.battery")
 
-	-- Layoutbox (used for switching layouts)
 	s.layouts = awful.widget.layoutbox({
 		screen = s,
 		buttons = {
@@ -27,17 +26,17 @@ screen.connect_signal("request::desktop_decoration", function(s)
 		},
 	})
 
-	-- Create the wibar (panel)
 	s.wibar = awful.wibar({
 		screen = s,
-		position = "left", -- Positioning the bar on the left side
-		width = dpi(45), -- Width of the bar
+		position = config.placement,
 		widget = {
 			{
 				{
 					tasklist.create(s), -- Create the tasklist
 					spacing = dpi(4),
-					layout = wibox.layout.fixed.vertical, -- Vertical layout for tasklist
+					layout = (config.placement == "left" or config.placement == "right")
+							and wibox.layout.fixed.vertical
+						or wibox.layout.fixed.horizontal,
 				},
 				expand = "none",
 				taglist, -- Create the taglist
@@ -56,27 +55,36 @@ screen.connect_signal("request::desktop_decoration", function(s)
 								},
 								clock,
 								spacing = dpi(6),
-								layout = wibox.layout.fixed.vertical, -- Clock Box Layout
+								layout = (config.placement == "left" or config.placement == "right")
+										and wibox.layout.fixed.vertical
+									or wibox.layout.fixed.horizontal,
 							},
 							margins = dpi(6),
 							widget = wibox.container.margin, -- Margin For Clock Box
 						},
 						bg = beautiful.bg_focus,
-						forced_width = dpi(30),
 						shape = helpers.rrect(6),
 						widget = wibox.container.background, -- Clock Box Container Background
 					},
 					spacing = dpi(8),
-					layout = wibox.layout.fixed.vertical, -- Bottom Widgets
+					layout = (config.placement == "left" or config.placement == "right")
+							and wibox.layout.fixed.vertical
+						or wibox.layout.fixed.horizontal,
 				},
-				layout = wibox.layout.align.vertical, -- Entire bar
+				layout = (config.placement == "left" or config.placement == "right") and wibox.layout.align.vertical
+					or wibox.layout.align.horizontal,
 			},
 			margins = dpi(2),
 			widget = wibox.container.margin, -- Apply margins to the overall container
 		},
 	})
 
+	if config.placement == "left" or config.placement == "right" then
+		s.wibar.width = dpi(45) -- Set width for vertical placement
+	else
+		s.wibar.height = dpi(45) -- Set height for horizontal placement
+	end
+
 	-- Set the wibar background and shape
 	s.wibar.bg = beautiful.bg_normal -- Set background color to theme's normal bg
-	s.wibar.shape = helpers.rrect(6) -- Apply rounded corners to the entire bar
 end)
