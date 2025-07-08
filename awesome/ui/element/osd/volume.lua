@@ -24,7 +24,7 @@ volume_osd.widget = wibox.widget({
 			{
 				id = "icon",
 				text = icons.high,
-				font = "Symbols Nerd Font " .. dpi(24) * config.dpi_multiplier,
+				font = "Symbols Nerd Font Mono " .. dpi(24) * config.dpi_multiplier,
 				widget = wibox.widget.textbox,
 			},
 			{
@@ -118,7 +118,7 @@ function volume_osd.update()
 
 	-- Set timer to hide the OSD after 2 seconds
 	hide_timer = gears.timer({
-		timeout = 2,
+		timeout = 1,
 		autostart = true,
 		single_shot = true,
 		callback = function()

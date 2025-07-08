@@ -1,0 +1,570 @@
+local gears = require("gears")
+local awful = require("awful")
+local wibox = require("wibox")
+local beautiful = require("beautiful")
+local rubato = require("rubato")
+local helpers = require("helpers")
+local dpi = beautiful.xresources.apply_dpi
+-- If you don't have bling, replace playerctl with your own playerctl lib or another method
+local bling = require("bling")
+local playerctl = bling.signal.playerctl.lib()
+
+-- You can replace this with your weather widget or remove
+
+screen.connect_signal("request::desktop_decoration", function(s)
+	-- Helper to create arcchart widget with smooth animation
+	local function create_arcchart_widget(signal_name, bg, fg, thickness, label, icon)
+		local widget = wibox.widget({
+			widget = wibox.container.background,
+			bg = beautiful.bg_focus,
+			forced_width = 150,
+			forced_height = 180,
+			{
+				widget = wibox.container.margin,
+				margins = dpi(10),
+				{
+					layout = wibox.layout.fixed.vertical,
+					spacing = dpi(10),
+					{
+						layout = wibox.layout.stack,
+						{
+							widget = wibox.container.margin,
+							margins = dpi(6),
+							{
+								widget = wibox.container.arcchart,
+								id = "progressbar",
+								max_value = 100,
+								min_value = 0,
+								thickness = thickness,
+								bg = bg,
+								colors = { fg },
+							},
+						},
+						{
+							widget = wibox.widget.textbox,
+							id = "icon",
+							font = beautiful.font .. " 20",
+							text = icon,
+							halign = "center",
+							valign = "center",
+						},
+					},
+					{
+						layout = wibox.layout.flex.horizontal,
+						{
+							widget = wibox.widget.textbox,
+							text = label,
+						},
+						{
+							widget = wibox.container.place,
+							halign = "right",
+							{
+								widget = wibox.widget.textbox,
+								id = "text",
+							},
+						},
+					},
+				},
+			},
+		})
+
+		local anim = rubato.timed({
+			duration = 0.3,
+			easing = rubato.easing.linear,
+			subscribed = function(h)
+				widget:get_children_by_id("progressbar")[1].value = h
+			end,
+		})
+
+		awesome.connect_signal(signal_name, function(value)
+			anim.target = value
+			widget:get_children_by_id("text")[1].text = value .. "%"
+		end)
+
+		return widget
+	end
+
+	local resources = wibox.widget({
+		layout = wibox.layout.fixed.horizontal,
+		spacing = dpi(10),
+		create_arcchart_widget("signal::cpu", beautiful.bg_urgent, beautiful.red, 15, "CPU:", ""),
+		create_arcchart_widget("signal::ram", beautiful.bg_urgent, beautiful.yellow, 15, "RAM:", ""),
+		create_arcchart_widget("signal::disk", beautiful.bg_urgent, beautiful.green, 15, "Disk:", ""),
+	})
+
+	-- Progressbar widget helper
+	local function create_progressbar_widget(color, width, icon)
+		return wibox.widget({
+			widget = wibox.container.background,
+			bg = beautiful.bg_focus,
+			forced_height = dpi(20),
+			{
+				layout = wibox.layout.fixed.horizontal,
+				fill_space = true,
+				spacing = dpi(10),
+				{
+					widget = wibox.widget.textbox,
+					id = "icon",
+					text = icon,
+					font = beautiful.font .. " 13",
+					halign = "center",
+				},
+				{
+					widget = wibox.container.background,
+					forced_width = dpi(36),
+					{
+						widget = wibox.widget.textbox,
+						id = "text",
+						halign = "center",
+					},
+				},
+				{
+					widget = wibox.widget.progressbar,
+					id = "progressbar",
+					max_value = 100,
+					forced_width = dpi(width),
+					background_color = beautiful.bg_urgent,
+					color = color,
+				},
+			},
+		})
+	end
+
+	-- Volume progressbar
+	local volume = create_progressbar_widget(beautiful.cyan, 370, "")
+
+	volume:buttons({
+		awful.button({}, 1, function()
+			awful.spawn.with_shell("pamixer --toggle-mute")
+			awesome.emit_signal("update::volume") -- you should emit this to update UI
+		end),
+		awful.button({}, 4, function()
+			awful.spawn.with_shell("pamixer --increase 2")
+			awesome.emit_signal("update::volume")
+		end),
+		awful.button({}, 5, function()
+			awful.spawn.with_shell("pamixer --decrease 2")
+			awesome.emit_signal("update::volume")
+		end),
+	})
+
+	local anim_volume = rubato.timed({
+		duration = 0.3,
+		easing = rubato.easing.linear,
+		subscribed = function(h)
+			volume:get_children_by_id("progressbar")[1].value = h
+		end,
+	})
+
+	awesome.connect_signal("signal::volume", function(value, icon)
+		anim_volume.target = value
+		volume:get_children_by_id("text")[1].text = value
+		volume:get_children_by_id("icon")[1].text = icon
+	end)
+
+	-- Brightness progressbar
+	local bright = create_progressbar_widget(beautiful.blue, 370, "")
+
+	bright:buttons({
+		awful.button({}, 4, function()
+			awful.spawn.with_shell("brightnessctl s 5%+")
+			awesome.emit_signal("update::brightness")
+		end),
+		awful.button({}, 5, function()
+			awful.spawn.with_shell("brightnessctl s 5%-")
+			awesome.emit_signal("update::brightness")
+		end),
+	})
+
+	local anim_bright = rubato.timed({
+		duration = 0.3,
+		easing = rubato.easing.linear,
+		subscribed = function(h)
+			bright:get_children_by_id("progressbar")[1].value = h
+		end,
+	})
+
+	awesome.connect_signal("signal::bright", function(value)
+		anim_bright.target = value
+		bright:get_children_by_id("text")[1].text = value
+	end)
+
+	-- Info widget with volume and brightness
+	local info = wibox.widget({
+		widget = wibox.container.background,
+		bg = beautiful.bg_focus,
+		forced_height = dpi(80),
+		{
+			widget = wibox.container.margin,
+			margins = dpi(10),
+			{
+				layout = wibox.layout.fixed.vertical,
+				spacing = dpi(20),
+				volume,
+				bright,
+			},
+		},
+	})
+
+	-- Toggles helper widget creation (wifi, mic, floating, opacity)
+	local function create_toggle_widget(bg, fg, icon, name, value, arrow_visible, arrow_callback)
+		return wibox.widget({
+			widget = wibox.container.background,
+			forced_width = dpi(230),
+			forced_height = dpi(80),
+			bg = beautiful.bg_focus,
+			{
+				layout = wibox.layout.fixed.horizontal,
+				spacing = dpi(20),
+				{
+					widget = wibox.container.margin,
+					left = dpi(10),
+					{
+						widget = wibox.container.place,
+						align = "center",
+						{
+							widget = wibox.container.background,
+							id = "icon_container",
+							bg = bg,
+							fg = fg,
+							{
+								widget = wibox.container.margin,
+								margins = dpi(10),
+								{
+									widget = wibox.widget.textbox,
+									id = "icon",
+									text = icon,
+									font = beautiful.font .. " 20",
+									halign = "center",
+								},
+							},
+						},
+					},
+				},
+				{
+					widget = wibox.container.place,
+					halign = "center",
+					{
+						layout = wibox.layout.fixed.vertical,
+						{
+							widget = wibox.widget.textbox,
+							text = name,
+						},
+						{
+							widget = wibox.widget.textbox,
+							id = "value",
+							text = value,
+						},
+					},
+				},
+				{
+					widget = wibox.widget.textbox,
+					text = "",
+					forced_width = dpi(80),
+					halign = "right",
+					font = beautiful.font .. " 24",
+					visible = arrow_visible,
+					buttons = arrow_callback and { awful.button({}, 1, arrow_callback) } or nil,
+				},
+			},
+		})
+	end
+
+	-- Toggle state changer (for UI color transitions)
+	local toggle_change = function(state, widget)
+		if state == "off" then
+			widget:get_children_by_id("value")[1].text = "Off"
+			helpers.ui.transitionColor({
+				old = beautiful.accent,
+				new = beautiful.bg_urgent,
+				transformer = function(col)
+					widget:get_children_by_id("icon_container")[1]:set_bg(col)
+				end,
+				duration = 0.8,
+			})
+			helpers.ui.transitionColor({
+				old = beautiful.bg,
+				new = beautiful.fg,
+				transformer = function(col)
+					widget:get_children_by_id("icon_container")[1]:set_fg(col)
+				end,
+				duration = 0.8,
+			})
+		else
+			widget:get_children_by_id("value")[1].text = "On"
+			helpers.ui.transitionColor({
+				old = beautiful.bg_urgent,
+				new = beautiful.accent,
+				transformer = function(col)
+					widget:get_children_by_id("icon_container")[1]:set_bg(col)
+				end,
+				duration = 0.8,
+			})
+			helpers.ui.transitionColor({
+				old = beautiful.fg,
+				new = beautiful.bg,
+				transformer = function(col)
+					widget:get_children_by_id("icon_container")[1]:set_fg(col)
+				end,
+				duration = 0.8,
+			})
+		end
+	end
+
+	-- Example toggle: wifi
+	local wifi = create_toggle_widget(beautiful.accent, beautiful.bg, "", "WiFi", "On", true, function()
+		awesome.emit_signal("open::wifi_applet")
+	end)
+
+	awesome.connect_signal("signal::wifi", function(value)
+		if value == "disabled" then
+			toggle_change("off", wifi)
+		else
+			toggle_change("on", wifi)
+		end
+	end)
+
+	wifi:get_children_by_id("icon_container")[1]:buttons({
+		awful.button({}, 1, function()
+			local state = wifi:get_children_by_id("value")[1].text
+			if state == "Off" then
+				awful.spawn.with_shell("nmcli radio wifi on")
+			else
+				awful.spawn.with_shell("nmcli radio wifi off")
+			end
+			awesome.emit_signal("update::wifi")
+		end),
+	})
+
+	-- You can create other toggles similarly: mic, floating layout toggle, opacity toggle etc.
+
+	-- Music player widgets using bling's playerctl
+	local art = wibox.widget({
+		image = beautiful.no_song,
+		valign = "right",
+		widget = wibox.widget.imagebox,
+	})
+
+	local title_widget = wibox.widget({
+		markup = "Nothing Playing",
+		align = "left",
+		widget = wibox.widget.textbox,
+	})
+
+	local artist_widget = wibox.widget({
+		align = "left",
+		widget = wibox.widget.textbox,
+	})
+
+	local function create_music_button(icon)
+		return wibox.widget({
+			widget = wibox.container.background,
+			bg = beautiful.bg_urgent,
+			{
+				widget = wibox.container.margin,
+				margins = dpi(5),
+				{
+					widget = wibox.widget.textbox,
+					id = "icon",
+					markup = icon,
+					font = beautiful.font .. " 16",
+				},
+			},
+		})
+	end
+
+	local next_button = create_music_button("")
+	next_button:buttons({
+		awful.button({}, 1, function()
+			playerctl:next()
+		end),
+	})
+
+	local prev_button = create_music_button("")
+	prev_button:buttons({
+		awful.button({}, 1, function()
+			playerctl:previous()
+		end),
+	})
+
+	local play_button = create_music_button("")
+	play_button:buttons({
+		awful.button({}, 1, function()
+			playerctl:play_pause()
+		end),
+	})
+
+	local media_slider = wibox.widget({
+		widget = wibox.widget.slider,
+		bar_color = beautiful.bg_urgent,
+		bar_active_color = beautiful.blue,
+		handle_width = 0,
+		minimum = 0,
+		maximum = 100,
+		value = 0,
+	})
+
+	local internal_update = false
+	local previous_value = 0
+
+	media_slider:connect_signal("property::value", function(_, new_value)
+		if internal_update and new_value ~= previous_value then
+			playerctl:set_position(new_value)
+			previous_value = new_value
+		end
+	end)
+
+	playerctl:connect_signal("position", function(_, interval_sec)
+		internal_update = true
+		previous_value = interval_sec
+		media_slider.value = interval_sec
+	end)
+
+	playerctl:connect_signal("metadata", function(_, title, artist, album_path)
+		if album_path == "" then
+			art:set_image(beautiful.no_song)
+		else
+			art:set_image(gears.surface.load_uncached(album_path))
+		end
+		title_widget:set_markup_silently(title)
+		artist_widget:set_markup_silently(artist)
+	end)
+
+	playerctl:connect_signal("playback_status", function(_, playing)
+		play_button:get_children_by_id("icon")[1].markup = playing and helpers.ui.colorizeText("", "")
+			or helpers.ui.colorizeText("", "")
+	end)
+
+	local music = wibox.widget({
+		widget = wibox.container.background,
+		forced_height = dpi(192),
+		bg = beautiful.bg_focus,
+		{
+			widget = wibox.container.margin,
+			margins = dpi(10),
+			{
+				layout = wibox.layout.stack,
+				{
+					widget = wibox.container.place,
+					halign = "right",
+					art,
+				},
+				{
+					widget = wibox.container.background,
+					bg = {
+						type = "linear",
+						from = { 0, 0 },
+						to = { 460, 0 },
+						stops = {
+							{ 0.4, beautiful.bg_focus },
+							{ 0.7, beautiful.bg_focus .. "CC" },
+							{ 1, beautiful.bg_focus .. "00" },
+						},
+					},
+				},
+				{
+					layout = wibox.layout.fixed.horizontal,
+					spacing = dpi(20),
+					{
+						widget = wibox.container.rotate,
+						direction = "east",
+						{
+							widget = wibox.container.background,
+							forced_width = dpi(10),
+							forced_height = dpi(6),
+							media_slider,
+						},
+					},
+					{
+						layout = wibox.layout.flex.vertical,
+						{
+							layout = wibox.layout.fixed.vertical,
+							spacing = dpi(10),
+							forced_width = dpi(200),
+							forced_height = dpi(100),
+							{
+								widget = wibox.container.scroll.horizontal,
+								step_function = wibox.container.scroll.step_functions.waiting_nonlinear_back_and_forth,
+								speed = 50,
+								title_widget,
+							},
+							artist_widget,
+						},
+						{
+							widget = wibox.container.place,
+							valign = "bottom",
+							halign = "left",
+							{
+								layout = wibox.layout.fixed.horizontal,
+								spacing = dpi(15),
+								prev_button,
+								play_button,
+								next_button,
+							},
+						},
+					},
+				},
+			},
+		},
+	})
+
+	-- Main control center widget with vertical layout and margins
+	local main = wibox.widget({
+		widget = wibox.container.background,
+		bg = beautiful.bg,
+		{
+			widget = wibox.container.margin,
+			margins = dpi(10),
+			{
+				layout = wibox.layout.fixed.vertical,
+				spacing = dpi(10),
+				-- Add your profile, resources, info, toggles, weather, music widgets here
+				-- profile,
+				resources,
+				info,
+				-- toggles,
+				music,
+			},
+		},
+	})
+
+	-- Popup for control center
+	local control = awful.popup({
+		screen = s,
+		visible = false,
+		ontop = true,
+		border_width = beautiful.border_width,
+		border_color = beautiful.border_color_normal,
+		minimum_height = s.geometry.height,
+		minimum_width = dpi(490),
+		maximum_width = dpi(600),
+		placement = function(d)
+			awful.placement.bottom_right(d, {
+				margins = {
+					top = -beautiful.border_width,
+					bottom = -beautiful.border_width,
+					right = -beautiful.border_width,
+				},
+			})
+		end,
+		widget = main,
+	})
+
+	-- Toggle control center visibility on signal
+	awesome.connect_signal("open::control", function()
+		control.visible = not control.visible
+	end)
+
+	-- Hide on click outside
+	client.connect_signal("button::press", function()
+		if control.visible then
+			control.visible = false
+		end
+	end)
+
+	awful.mouse.append_global_mousebinding(awful.button({}, 1, function()
+		if control.visible then
+			control.visible = false
+		end
+	end))
+end)

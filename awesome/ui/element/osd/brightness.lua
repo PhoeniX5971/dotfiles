@@ -12,9 +12,9 @@ local hide_timer = nil
 
 -- Icons for brightness levels
 local icons = {
-	high = "󰃠", -- nf-fa-sun
-	medium = "󰃟", -- nf-fa-adjust
-	low = "󰃞", -- nf-fa-moon_o
+	high = "󰃠",
+	medium = "󰃟",
+	low = "󰃞",
 }
 
 -- Create the OSD widget
@@ -24,7 +24,7 @@ brightness_osd.widget = wibox.widget({
 			{
 				id = "icon",
 				text = icons.high,
-				font = "Symbols Nerd Font " .. dpi(24) * config.dpi_multiplier,
+				font = "Symbols Nerd Font Mono " .. dpi(24) * config.dpi_multiplier,
 				widget = wibox.widget.textbox,
 			},
 			{
@@ -113,7 +113,7 @@ function brightness_osd.update()
 	end
 
 	hide_timer = gears.timer({
-		timeout = 2,
+		timeout = 1,
 		autostart = true,
 		single_shot = true,
 		callback = function()

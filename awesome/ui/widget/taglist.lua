@@ -48,7 +48,7 @@ local get_taglist = function(s)
 						id = "icon_role",
 						align = "center",
 						valign = "center",
-						font = beautiful.icon_font or "DF Mono",
+						font = "DF Mono",
 						widget = wibox.widget.textbox,
 					},
 					widget = wibox.container.margin,

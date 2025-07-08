@@ -82,6 +82,10 @@ awful.keyboard.append_global_keybindings({
 		end)
 	end, { description = "decrease brightness", group = "media" }),
 
+	awful.key({ modkey }, "F2", function()
+		awesome.emit_signal("open::control")
+	end, { description = "toggle control center", group = "custom" }),
+
 	-- Tag keybinds
 	awful.key({
 		modifiers = { modkey },

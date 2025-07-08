@@ -5,7 +5,7 @@ local config = require("config")
 local battery_icon = wibox.widget({
 	align = "center",
 	valign = "center",
-	font = "Symbols Nerd Font " .. 16 * config.dpi_multiplier,
+	font = "Symbols Nerd Font Mono " .. 16 * config.dpi_multiplier,
 	widget = wibox.widget.textbox,
 })
 
