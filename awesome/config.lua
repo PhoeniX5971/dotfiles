@@ -1,5 +1,5 @@
 local module = {
-	placement = "left",
+	placement = "top",
 }
 
 return module

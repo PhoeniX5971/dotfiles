@@ -34,8 +34,8 @@ cp "$NEW_WALLPAPER" "$NEW_WALLPAPER_PATH"
 echo "New wallpaper set: $NEW_WALLPAPER_PATH"
 
 # Apply the new wallpaper using waypaper
-waypaper --wallpaper "$NEW_WALLPAPER"
-echo "Waypaper command executed."
+bash "$SCRIPT_DIR/wallpaper1.sh $NEW_WALLPAPER"
+echo "Wallpaper script executed."
 
 # Apply the new wallpaper using the python script
 python3 "$DOTFILES_HYPR_DIR/scripts/wallpaper.py" --image "$NEW_WALLPAPER"
