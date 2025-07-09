@@ -92,6 +92,10 @@ awful.keyboard.append_global_keybindings({
 		awesome.emit_signal("open::control")
 	end, { description = "toggle control center", group = "custom" }),
 
+	awful.key({ modkey }, "F3", function()
+		awesome.emit_signal("open::notif_center")
+	end, { description = "toggle notif center", group = "custom" }),
+
 	-- Tag keybinds
 	awful.key({
 		modifiers = { modkey },
