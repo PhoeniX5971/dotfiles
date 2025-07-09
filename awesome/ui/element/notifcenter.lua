@@ -124,7 +124,7 @@ local create_notif = function(icon, n, width)
 		widget = wibox.container.background,
 		forced_height = dpi(120),
 		shape = helpers.rrect(dpi(6) * config.dpi_multiplier),
-		bg = beautiful.bg_focus,
+		bg = beautiful.bg_normal,
 		{
 			layout = wibox.layout.align.horizontal,
 			icon_widget,
@@ -228,8 +228,7 @@ local notif_center = awful.popup({
 	visible = false,
 	ontop = true,
 	shape = helpers.rrect(dpi(6) * config.dpi_multiplier),
-	border_width = beautiful.border_width,
-	border_color = beautiful.border_color_active,
+	border_color = beautiful.border_color,
 	minimum_height = dpi(900),
 	maximum_height = dpi(900),
 	minimum_width = 490,
