@@ -18,8 +18,8 @@ local volume_slider = wibox.widget({
 	handle_color = beautiful.bg_focus,
 	handle_border_color = beautiful.bg_focus,
 	handle_shape = helpers.rrect(dpi(4)),
-	handle_width = dpi(24),
-	handle_border_width = dpi(1),
+	handle_width = dpi(5),
+	handle_border_width = dpi(4),
 	widget = wibox.widget.slider,
 })
 
@@ -34,6 +34,15 @@ awful.spawn.easy_async("pamixer --get-volume", function(stdout)
 		volume_slider.value = vol
 	end
 end)
+
+volume_slider.update_volume = function()
+	awful.spawn.easy_async("pamixer --get-volume", function(stdout)
+		local vol = tonumber(stdout)
+		if vol then
+			volume_slider.value = vol
+		end
+	end)
+end
 
 return {
 	icon = "",

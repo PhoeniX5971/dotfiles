@@ -1,5 +1,7 @@
 local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup")
+local volume_slider = require("ui.element.controlcenter.component.volume")
+local brightness_slider = require("ui.element.controlcenter.component.brightness")
 local volume_osd = require("ui.element.osd.volume")
 local brightness_osd = require("ui.element.osd.brightness")
 
@@ -54,12 +56,14 @@ awful.keyboard.append_global_keybindings({
 	end),
 	awful.key({}, "XF86AudioLowerVolume", function()
 		awful.spawn.easy_async_with_shell("pamixer --decrease 5 && sleep 0.05", function()
+			volume_slider.slider.update_volume()
 			volume_osd.update()
 		end)
 	end, { description = "lower volume", group = "media" }),
 
 	awful.key({}, "XF86AudioRaiseVolume", function()
 		awful.spawn.easy_async_with_shell("pamixer --increase 5 && sleep 0.05", function()
+			volume_slider.slider.update_volume()
 			volume_osd.update()
 		end)
 	end, { description = "raise volume", group = "media" }),
@@ -72,12 +76,14 @@ awful.keyboard.append_global_keybindings({
 
 	awful.key({}, "XF86MonBrightnessUp", function()
 		awful.spawn.easy_async_with_shell("brightnessctl set +5% && sleep 0.05", function()
+			brightness_slider.slider.update_brightness()
 			brightness_osd.update()
 		end)
 	end, { description = "increase brightness", group = "media" }),
 
 	awful.key({}, "XF86MonBrightnessDown", function()
 		awful.spawn.easy_async_with_shell("brightnessctl set 5%- && sleep 0.05", function()
+			brightness_slider.slider.update_brightness()
 			brightness_osd.update()
 		end)
 	end, { description = "decrease brightness", group = "media" }),

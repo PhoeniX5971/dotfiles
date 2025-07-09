@@ -18,8 +18,8 @@ local brightness_slider = wibox.widget({
 	handle_color = beautiful.bg_focus,
 	handle_border_color = beautiful.bg_focus,
 	handle_shape = helpers.rrect(dpi(4)),
-	handle_width = dpi(24),
-	handle_border_width = dpi(1),
+	handle_width = dpi(5),
+	handle_border_width = dpi(4),
 	widget = wibox.widget.slider,
 })
 
@@ -37,6 +37,18 @@ awful.spawn.easy_async("brightnessctl g", function(stdout)
 		end
 	end)
 end)
+
+brightness_slider.update_brightness = function()
+	awful.spawn.easy_async("brightnessctl g", function(stdout)
+		local cur = tonumber(stdout)
+		awful.spawn.easy_async("brightnessctl m", function(maxout)
+			local max = tonumber(maxout)
+			if cur and max then
+				brightness_slider.value = math.floor((cur / max) * 100)
+			end
+		end)
+	end)
+end
 
 return {
 	icon = "󰃠",
