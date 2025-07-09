@@ -32,7 +32,7 @@ awful.keyboard.append_global_keybindings({
 		awful.spawn("flameshot gui")
 	end, { description = "Screen Shot", group = "awesome" }),
 	awful.key({ modkey }, "b", function()
-		awful.spawn("brave")
+		awful.spawn("zen-browser")
 	end, { description = "open browser", group = "awesome" }),
 	awful.key({ modkey }, "d", function()
 		awful.spawn("rofi -show drun")

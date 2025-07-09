@@ -36,7 +36,7 @@ theme.bg_systray = "#0030FF"
 theme.systray_icon_spacing = dpi(8) * config.dpi_multiplier
 
 theme.useless_gap = dpi(8) * config.dpi_multiplier
-theme.border_width = dpi(4) * config.dpi_multiplier
+theme.border_width = dpi(2) * config.dpi_multiplier
 theme.border_color_normal = "#000008"
 theme.border_color_active = "#1B62DC"
 theme.border_color_marked = "#000008"

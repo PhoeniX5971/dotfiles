@@ -1,0 +1,34 @@
+/**
+ * Auto-generated Material Discord Theme (via pywal)
+ * Accent: #0030FF
+ */
+
+@import url(https://capnkitten.github.io/BetterDiscord/Themes/Material-Discord/css/source.css);
+@import url(https://capnkitten.github.io/BetterDiscord/Themes/Material-Discord/css/addons/material-you/source.css);
+
+:root {
+    --accent-hue: 228;
+    --accent-saturation: 100%;
+    --accent-lightness: 50%;
+    --accent-text-color: #8ed6f1;
+    --accent-button-action: #8ed6f1;
+
+    --alert-hue: 0;
+    --alert-saturation: 85%;
+    --alert-lightness: 61%;
+    --alert-text-color: #8ed6f1;
+
+    --message-radius: 18px;
+    --media-radius: 10px;
+    --card-radius: 8px;
+    --card-radius-big: 18px;
+    --button-height: 36px;
+    --input-height: 36px;
+    --popout-radius: 8px;
+    --tooltip-radius: 8px;
+    --tooltip-color: hsl(0, 0%, 38%, 0.9);
+    --tooltip-text-color: hsl(0, 0%, 87%);
+    --tooltip-font-size: 12px;
+    --scrollbar-width: 10px;
+    --scrollbar-thin-width: 6px;
+}
