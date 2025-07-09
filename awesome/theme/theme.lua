@@ -6,43 +6,43 @@ local theme = {}
 
 theme.font = "DM Mono Bold " .. 14 * config.dpi_multiplier
 
-theme.bg_normal = "#201f21"
-theme.bg_focus = "#5BABEB"
-theme.bg_urgent = "#5FCBFD"
+theme.bg_normal = "#000008"
+theme.bg_focus = "#0030FF"
+theme.bg_urgent = "#1B62DC"
 
-theme.fg_normal = "#dee8f1"
-theme.fg_focus = "#C2BAC8"
-theme.fg_urgent = "#5BABEB"
+theme.fg_normal = "#8ed6f1"
+theme.fg_focus = "#B736C8"
+theme.fg_urgent = "#0030FF"
 
-theme.tasklist_bg_focus = "#201f21"
-theme.tasklist_bg_urgent = "#201f21"
-theme.tasklist_fg_normal = "#dee8f125"
-theme.tasklist_fg_focus = "#dee8f1"
-theme.tasklist_fg_urgent = "#9098A8"
-theme.tasklist_fg_minimize = "#dee8f125"
+theme.tasklist_bg_focus = "#000008"
+theme.tasklist_bg_urgent = "#000008"
+theme.tasklist_fg_normal = "#8ed6f125"
+theme.tasklist_fg_focus = "#8ed6f1"
+theme.tasklist_fg_urgent = "#004FFE"
+theme.tasklist_fg_minimize = "#8ed6f125"
 theme.tasklist_font_minimized = "JetBrains Mono NF Italic Bold " .. 13 * config.dpi_multiplier
 theme.tasklist_plain_task_name = true
 
-theme.taglist_fg_focus = "#C2BAC8"
-theme.taglist_fg_empty = "#dee8f125"
-theme.taglist_fg_occupied = "#dee8f1"
-theme.taglist_fg_urgent = "#5BABEB"
+theme.taglist_fg_focus = "#B736C8"
+theme.taglist_fg_empty = "#8ed6f125"
+theme.taglist_fg_occupied = "#8ed6f1"
+theme.taglist_fg_urgent = "#0030FF"
 theme.taglist_bg_focus = "#00000000"
 theme.taglist_bg_occupied = "#00000000"
 theme.taglist_bg_empty = "#00000000"
-theme.taglist_bg_urgent = "#9098A8"
+theme.taglist_bg_urgent = "#004FFE"
 
-theme.bg_systray = "#5BABEB"
+theme.bg_systray = "#0030FF"
 theme.systray_icon_spacing = dpi(8) * config.dpi_multiplier
 
 theme.useless_gap = dpi(8) * config.dpi_multiplier
 theme.border_width = dpi(4) * config.dpi_multiplier
-theme.border_color_normal = "#201f21"
-theme.border_color_active = "#5FCBFD"
-theme.border_color_marked = "#201f21"
+theme.border_color_normal = "#000008"
+theme.border_color_active = "#1B62DC"
+theme.border_color_marked = "#000008"
 theme.tooltip_opacity = 0
 
-theme.battery = "#dee8f1"
+theme.battery = "#8ed6f1"
 theme.battery_green = "#00ff00"
 theme.battery_yellow = "#ffff00"
 theme.battery_red = "#ff0000"
