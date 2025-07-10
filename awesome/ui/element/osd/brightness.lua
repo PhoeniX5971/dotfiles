@@ -62,7 +62,7 @@ brightness_osd.widget = wibox.widget({
 -- Create the OSD popup
 brightness_osd.popup = awful.popup({
 	widget = brightness_osd.widget,
-	border_color = beautiful.border_color_active,
+	border_color = beautiful.border_color_normal,
 	border_width = beautiful.border_width,
 	ontop = true,
 	visible = false,
