@@ -33,7 +33,7 @@ notifs_clear:buttons(gears.table.join(awful.button({}, 1, function()
 end)))
 
 local notifs_empty = wibox.widget({
-	forced_height = dpi(900),
+	forced_height = dpi(900) * config.dpi_multiplier,
 	widget = wibox.container.background,
 	{
 		layout = wibox.layout.flex.vertical,
@@ -47,7 +47,7 @@ local notifs_empty = wibox.widget({
 })
 
 local notifs_container = wibox.widget({
-	forced_height = dpi(900),
+	forced_height = dpi(900) * config.dpi_multiplier,
 	layout = require("overflow").vertical,
 	scrollbar_enabled = false,
 	spacing = 10,
@@ -78,7 +78,7 @@ local create_notif = function(icon, n, width)
 		widget = wibox.container.constraint,
 		{
 			widget = wibox.container.margin,
-			margins = 20,
+			margins = dpi(20) * config.dpi_multiplier,
 			{
 				widget = wibox.widget.imagebox,
 				image = icon,
@@ -93,18 +93,18 @@ local create_notif = function(icon, n, width)
 		widget = wibox.container.scroll.horizontal,
 		step_function = wibox.container.scroll.step_functions.waiting_nonlinear_back_and_forth,
 		speed = 50,
-		forced_width = 200,
+		forced_width = dpi(200) * config.dpi_multiplier,
 		{
 			widget = wibox.widget.textbox,
 			text = n.title,
 			align = "left",
-			forced_width = 200,
+			forced_width = dpi(200) * config.dpi_multiplier,
 		},
 	})
 
 	local time_widget = wibox.widget({
 		widget = wibox.container.margin,
-		margins = { right = 4 },
+		margins = { right = dpi(4) * config.dpi_multiplier },
 		{
 			widget = wibox.widget.textbox,
 			text = time,
@@ -116,13 +116,13 @@ local create_notif = function(icon, n, width)
 	local text_notif = wibox.widget({
 		markup = n.message,
 		align = "left",
-		forced_width = 165,
+		forced_width = dpi(165) * config.dpi_multiplier,
 		widget = wibox.widget.textbox,
 	})
 
 	local box = wibox.widget({
 		widget = wibox.container.background,
-		forced_height = dpi(120),
+		forced_height = dpi(120) * config.dpi_multiplier,
 		shape = helpers.rrect(dpi(6) * config.dpi_multiplier),
 		bg = beautiful.bg_normal,
 		{
@@ -130,13 +130,13 @@ local create_notif = function(icon, n, width)
 			icon_widget,
 			{
 				widget = wibox.container.margin,
-				margins = 10,
+				margins = dpi(10) * config.dpi_multiplier,
 				{
 					layout = wibox.layout.align.vertical,
 					{
 						layout = wibox.layout.fixed.vertical,
 						expand = "none",
-						spacing = 10,
+						spacing = dpi(10) * config.dpi_multiplier,
 						{
 							layout = wibox.layout.align.horizontal,
 							title_widget,
@@ -188,16 +188,16 @@ awesome.connect_signal("notifs::count", function(count)
 end)
 
 local notifs = wibox.widget({
-	spacing = 10,
+	spacing = dpi(10) * config.dpi_multiplier,
 	layout = wibox.layout.fixed.vertical,
 	{
 		widget = wibox.container.margin,
-		margins = 10,
+		margins = dpi(10) * config.dpi_multiplier,
 		{
 			layout = wibox.layout.align.horizontal,
 			{
 				layout = wibox.layout.fixed.horizontal,
-				spacing = 10,
+				spacing = dpi(10) * config.dpi_multiplier,
 				label,
 				notifs_count_widget,
 			},
@@ -215,10 +215,10 @@ local main = wibox.widget({
 	bg = beautiful.bg,
 	{
 		widget = wibox.container.margin,
-		margins = 10,
+		margins = dpi(10) * config.dpi_multiplier,
 		{
 			layout = wibox.layout.fixed.vertical,
-			spacing = 10,
+			spacing = dpi(10) * config.dpi_multiplier,
 			notifs,
 		},
 	},
@@ -229,14 +229,15 @@ local notif_center = awful.popup({
 	ontop = true,
 	shape = helpers.rrect(dpi(6) * config.dpi_multiplier),
 	border_color = beautiful.border_color,
-	minimum_height = dpi(900),
-	maximum_height = dpi(900),
-	minimum_width = 490,
-	maximum_width = 490,
+	minimum_height = dpi(900) * config.dpi_multiplier,
+	maximum_height = dpi(900) * config.dpi_multiplier,
+	minimum_width = dpi(590) * config.dpi_multiplier,
+	maximum_width = dpi(590) * config.dpi_multiplier,
 	placement = function(d)
 		awful.placement.bottom_right(d, {
 			honor_workarea = true,
-			margins = beautiful.useless_gap * 2 + beautiful.border_width * 1,
+			margins = beautiful.useless_gap * dpi(2) * config.dpi_multiplier
+				+ beautiful.border_width * 1 * config.dpi_multiplier,
 		})
 	end,
 	widget = main,
