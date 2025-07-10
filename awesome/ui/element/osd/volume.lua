@@ -68,7 +68,7 @@ volume_osd.popup = awful.popup({
 	visible = false,
 	shape = helpers.rrect(dpi(6)),
 	placement = function(c)
-		awful.placement.bottom(c, { margins = { bottom = dpi(50) * config.dpi_multiplier } })
+		awful.placement.top(c, { margins = { top = dpi(50) * config.dpi_multiplier } })
 	end,
 })
 
