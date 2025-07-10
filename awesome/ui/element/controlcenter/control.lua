@@ -9,7 +9,7 @@ local config = require("config")
 local sliderbox = require("ui.element.controlcenter.component.sliderbox")
 local volume = require("ui.element.controlcenter.component.volume")
 local brightness = require("ui.element.controlcenter.component.brightness")
--- local player = require("ui.element.controlcenter.component.playerctl")
+-- local player = require("ui.element.controlcenter.component.player")
 
 -- Create container widget
 local control_center_widget = wibox.widget({
@@ -19,6 +19,7 @@ local control_center_widget = wibox.widget({
 				{
 					sliderbox(volume.icon, volume.slider),
 					sliderbox(brightness.icon, brightness.slider),
+					-- player,
 					spacing = dpi(10),
 					layout = wibox.layout.fixed.vertical,
 				},
