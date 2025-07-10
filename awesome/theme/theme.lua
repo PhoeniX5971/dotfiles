@@ -47,8 +47,9 @@ theme.battery_green = "#00ff00"
 theme.battery_yellow = "#ffff00"
 theme.battery_red = "#ff0000"
 
-theme.hotkeys_font = "DM Mono " .. 14 * config.dpi_multiplier
-theme.hotkeys_description_font = "DM Mono " .. 12 * config.dpi_multiplier
+theme.hotkeys_font = "DM Mono Bold " .. 14 * config.dpi_multiplier
+theme.hotkeys_description_font = "DM Mono Bold " .. 14 * config.dpi_multiplier
+theme.hotkeys_border_color = theme.border_color_active
 
 theme.layout_fairh = gears.filesystem.get_configuration_dir() .. "theme/default/layouts/fairhw.png"
 theme.layout_fairv = gears.filesystem.get_configuration_dir() .. "theme/default/layouts/fairvw.png"

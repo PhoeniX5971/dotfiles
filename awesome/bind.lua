@@ -113,7 +113,7 @@ awful.keyboard.append_global_keybindings({
 	awful.key({
 		modifiers = { modkey, "Shift" },
 		keygroup = "numrow",
-		description = "move focused client to tag and follow",
+		description = "move to tag and follow",
 		group = "tag",
 		on_press = function(index)
 			if client.focus then
