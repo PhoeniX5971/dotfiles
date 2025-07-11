@@ -6,43 +6,43 @@ local theme = {}
 
 theme.font = "DM Mono Bold " .. 14 * config.dpi_multiplier
 
-theme.bg_normal = "#0a0806"
-theme.bg_focus = "#912E24"
-theme.bg_urgent = "#B03427"
+theme.bg_normal = "#000000"
+theme.bg_focus = "#686868"
+theme.bg_urgent = "#787878"
 
-theme.fg_normal = "#d4a8a1"
-theme.fg_focus = "#E8422C"
-theme.fg_urgent = "#912E24"
+theme.fg_normal = "#dddddd"
+theme.fg_focus = "#A7A7A7"
+theme.fg_urgent = "#686868"
 
-theme.tasklist_bg_focus = "#0a0806"
-theme.tasklist_bg_urgent = "#0a0806"
-theme.tasklist_fg_normal = "#d4a8a125"
-theme.tasklist_fg_focus = "#d4a8a1"
-theme.tasklist_fg_urgent = "#CD3A29"
-theme.tasklist_fg_minimize = "#d4a8a125"
+theme.tasklist_bg_focus = "#000000"
+theme.tasklist_bg_urgent = "#000000"
+theme.tasklist_fg_normal = "#dddddd25"
+theme.tasklist_fg_focus = "#dddddd"
+theme.tasklist_fg_urgent = "#888888"
+theme.tasklist_fg_minimize = "#dddddd25"
 theme.tasklist_font_minimized = "JetBrains Mono NF Italic Bold " .. 13 * config.dpi_multiplier
 theme.tasklist_plain_task_name = true
 
-theme.taglist_fg_focus = "#E8422C"
-theme.taglist_fg_empty = "#d4a8a125"
-theme.taglist_fg_occupied = "#d4a8a1"
-theme.taglist_fg_urgent = "#912E24"
+theme.taglist_fg_focus = "#A7A7A7"
+theme.taglist_fg_empty = "#dddddd25"
+theme.taglist_fg_occupied = "#dddddd"
+theme.taglist_fg_urgent = "#686868"
 theme.taglist_bg_focus = "#00000000"
 theme.taglist_bg_occupied = "#00000000"
 theme.taglist_bg_empty = "#00000000"
-theme.taglist_bg_urgent = "#CD3A29"
+theme.taglist_bg_urgent = "#888888"
 
-theme.bg_systray = "#912E24"
+theme.bg_systray = "#686868"
 theme.systray_icon_spacing = dpi(8) * config.dpi_multiplier
 
 theme.useless_gap = dpi(8) * config.dpi_multiplier
 theme.border_width = dpi(2) * config.dpi_multiplier
-theme.border_color_normal = "#0a0806"
-theme.border_color_active = "#B03427"
-theme.border_color_marked = "#0a0806"
+theme.border_color_normal = "#000000"
+theme.border_color_active = "#787878"
+theme.border_color_marked = "#000000"
 theme.tooltip_opacity = 0
 
-theme.battery = "#d4a8a1"
+theme.battery = "#dddddd"
 theme.battery_green = "#00ff00"
 theme.battery_yellow = "#ffff00"
 theme.battery_red = "#ff0000"
@@ -50,9 +50,6 @@ theme.battery_red = "#ff0000"
 theme.hotkeys_font = "DM Mono Bold " .. 14 * config.dpi_multiplier
 theme.hotkeys_description_font = "DM Mono Bold " .. 14 * config.dpi_multiplier
 theme.hotkeys_border_color = theme.border_color_active
-
-theme.layoutlist_border = theme.border_color_normal
-theme.layoutlist_border_width = 0
 
 theme.layout_fairh = gears.filesystem.get_configuration_dir() .. "theme/default/layouts/fairhw.png"
 theme.layout_fairv = gears.filesystem.get_configuration_dir() .. "theme/default/layouts/fairvw.png"

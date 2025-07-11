@@ -66,7 +66,7 @@ brightness_osd.popup = awful.popup({
 	border_width = beautiful.border_width,
 	ontop = true,
 	visible = false,
-	shape = helpers.rrect(dpi(6)),
+	shape = helpers.rrect(dpi(6) * config.dpi_multiplier),
 	placement = function(c)
 		awful.placement.top(c, { margins = { top = dpi(50) * config.dpi_multiplier } })
 	end,
