@@ -14,9 +14,7 @@ local battery = lain.widget.bat({
 		local icon
 		local perc = tonumber(bat_now.perc) or 0
 
-		if bat_now.status == "Charging" then
-			icon = "⚡"
-		elseif perc >= 90 then
+		if perc >= 90 then
 			icon = ""
 		elseif perc >= 60 then
 			icon = ""
