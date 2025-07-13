@@ -23,3 +23,18 @@ Most of the yoinked stuff are from:
 - [ML4W](https://github.com/mylinuxforwork/dotfiles)
 
 All credits go to the original authors, and I must say they have some good stuff.
+
+## Awesome
+
+Those dotfiles were made by me, while some snippets were scraped off the internet, i still had to poor a lot of time and effort and i can proudly say that i wrote those from scratch.
+
+Preview showcasing:
+
+- control center (currently only has slider for brightness and volume)
+- volume osd
+- brightness osd
+  notification center
+- dynamic theme switching with a personal wallpaper script
+- lock screen
+
+![Preview](assets/dotfiles-preview.mp4)

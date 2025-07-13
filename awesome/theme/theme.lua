@@ -20,7 +20,7 @@ theme.tasklist_fg_normal = "#e0cef325"
 theme.tasklist_fg_focus = "#e0cef3"
 theme.tasklist_fg_urgent = "#9974E8"
 theme.tasklist_fg_minimize = "#e0cef325"
-theme.tasklist_font_minimized = "DM Mono " .. 13 * config.dpi_multiplier
+theme.tasklist_font_minimized = "JetBrains Mono NF Italic Bold " .. 13 * config.dpi_multiplier
 theme.tasklist_plain_task_name = true
 
 theme.taglist_fg_focus = "#698CEC"
