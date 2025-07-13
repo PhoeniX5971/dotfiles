@@ -19,6 +19,19 @@ end)
 
 ruled.notification.connect_signal("request::rules", function()
 	ruled.notification.append_rule({
+		rule = { urgency = "low" },
+		properties = {
+			screen = awful.screen.preferred,
+			implicit_timeout = 4,
+			position = "top_right",
+			spacing = 10,
+			bg = beautiful.bg,
+			fg = beautiful.fg,
+			border_color = beautiful.border_color_normal,
+		},
+	})
+
+	ruled.notification.append_rule({
 		rule = { urgency = "normal" },
 		properties = {
 			screen = awful.screen.preferred,
@@ -27,7 +40,6 @@ ruled.notification.connect_signal("request::rules", function()
 			spacing = 10,
 			bg = beautiful.bg,
 			fg = beautiful.fg,
-			border_width = beautiful.border_width,
 			border_color = beautiful.border_color_normal,
 		},
 	})
@@ -41,7 +53,6 @@ ruled.notification.connect_signal("request::rules", function()
 			spacing = 10,
 			bg = beautiful.bg,
 			fg = beautiful.fg,
-			border_width = beautiful.border_width,
 			border_color = beautiful.border_color_normal,
 			icon = beautiful.notification_error,
 		},

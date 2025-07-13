@@ -1,0 +1,2 @@
+	yay -Syu awesome-git upower lain-git awesome-rubato-git awesome-bling-git ttf-nerd-fonts-symbols \
+	ttf-nerd-fonts-symbols-mono ttf-dm-mono-git picom-ftlabs-git flameshot betterlockscreen xfce4-power-manager mpd
