@@ -30,6 +30,9 @@ Those dotfiles were made by me, while some snippets were scraped off the interne
 
 Preview showcasing:
 
+- config to change:
+  - bar placement
+  - ui scaling
 - control center (currently only has slider for brightness and volume)
 - volume osd
 - brightness osd
