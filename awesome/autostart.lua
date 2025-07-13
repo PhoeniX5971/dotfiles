@@ -12,7 +12,13 @@ awful.spawn.with_shell("setxkbmap -option caps:escape")
 -- Start picom (with your config file)
 awful.spawn.with_shell("picom")
 
--- Put this in rc.lua or call from Lua prompt
+-- Start xfce4 power manager
+awful.spawn.with_shell("xfce4-power-manager")
+
+-- Update betterlockscreen wallpaper
+awful.spawn.with_shell("betterlockscreen -u ~/.cache/current_wallpaper.png")
+
+-- For different screen sizes
 awful.screen.connect_for_each_screen(function(s)
 	gears.wallpaper.maximized(beautiful.wallpaper, s, true)
 end)

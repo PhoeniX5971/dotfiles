@@ -96,6 +96,27 @@ awful.keyboard.append_global_keybindings({
 		awesome.emit_signal("open::notif_center")
 	end, { description = "toggle notif center", group = "custom" }),
 
+	awful.key({ modkey }, "F4", function()
+		awful.spawn.with_shell([[
+		betterlockscreen -l -- \
+			--inside-color=040619ff \
+			--ring-color=355BBFff \
+			--line-color=355BBFff \
+			--separator-color=355BBFff \
+			--ringver-color=698CECff \
+			--ringwrong-color=5B6BDBff \
+			--keyhl-color=698CECff \
+			--bshl-color=5B6BDBff \
+			--insidever-color=040619ff \
+			--insidewrong-color=040619ff \
+			--clock \
+			--time-color=e0cef3ff \
+			--date-color=698CECff \
+			--time-font="DM Mono Bold" \
+			--date-font="DM Mono Bold"
+		]])
+	end, { description = "Lock Screen", group = "custom" }),
+
 	-- Tag keybinds
 	awful.key({
 		modifiers = { modkey },

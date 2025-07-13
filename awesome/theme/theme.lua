@@ -6,43 +6,43 @@ local theme = {}
 
 theme.font = "DM Mono Bold " .. 14 * config.dpi_multiplier
 
-theme.bg_normal = "#000000"
-theme.bg_focus = "#686868"
-theme.bg_urgent = "#787878"
+theme.bg_normal = "#040619"
+theme.bg_focus = "#355BBF"
+theme.bg_urgent = "#5B6BDB"
 
-theme.fg_normal = "#dddddd"
-theme.fg_focus = "#A7A7A7"
-theme.fg_urgent = "#686868"
+theme.fg_normal = "#e0cef3"
+theme.fg_focus = "#698CEC"
+theme.fg_urgent = "#355BBF"
 
-theme.tasklist_bg_focus = "#000000"
-theme.tasklist_bg_urgent = "#000000"
-theme.tasklist_fg_normal = "#dddddd25"
-theme.tasklist_fg_focus = "#dddddd"
-theme.tasklist_fg_urgent = "#888888"
-theme.tasklist_fg_minimize = "#dddddd25"
-theme.tasklist_font_minimized = "JetBrains Mono NF Italic Bold " .. 13 * config.dpi_multiplier
+theme.tasklist_bg_focus = "#040619"
+theme.tasklist_bg_urgent = "#040619"
+theme.tasklist_fg_normal = "#e0cef325"
+theme.tasklist_fg_focus = "#e0cef3"
+theme.tasklist_fg_urgent = "#9974E8"
+theme.tasklist_fg_minimize = "#e0cef325"
+theme.tasklist_font_minimized = "DM Mono " .. 13 * config.dpi_multiplier
 theme.tasklist_plain_task_name = true
 
-theme.taglist_fg_focus = "#A7A7A7"
-theme.taglist_fg_empty = "#dddddd25"
-theme.taglist_fg_occupied = "#dddddd"
-theme.taglist_fg_urgent = "#686868"
+theme.taglist_fg_focus = "#698CEC"
+theme.taglist_fg_empty = "#e0cef325"
+theme.taglist_fg_occupied = "#e0cef3"
+theme.taglist_fg_urgent = "#355BBF"
 theme.taglist_bg_focus = "#00000000"
 theme.taglist_bg_occupied = "#00000000"
 theme.taglist_bg_empty = "#00000000"
-theme.taglist_bg_urgent = "#888888"
+theme.taglist_bg_urgent = "#9974E8"
 
-theme.bg_systray = "#686868"
+theme.bg_systray = "#355BBF"
 theme.systray_icon_spacing = dpi(8) * config.dpi_multiplier
 
 theme.useless_gap = dpi(8) * config.dpi_multiplier
 theme.border_width = dpi(2) * config.dpi_multiplier
-theme.border_color_normal = "#000000"
-theme.border_color_active = "#787878"
-theme.border_color_marked = "#000000"
+theme.border_color_normal = "#040619"
+theme.border_color_active = "#5B6BDB"
+theme.border_color_marked = "#040619"
 theme.tooltip_opacity = 0
 
-theme.battery = "#dddddd"
+theme.battery = "#e0cef3"
 theme.battery_green = "#00ff00"
 theme.battery_yellow = "#ffff00"
 theme.battery_red = "#ff0000"
