@@ -40,4 +40,4 @@ Preview showcasing:
 - dynamic theme switching with a personal wallpaper script
 - lock screen
 
-![Preview](assets/dotfiles-preview.mp4)
+![Preview](https://youtu.be/HsecSB-CDLA)
