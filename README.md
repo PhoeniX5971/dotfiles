@@ -40,4 +40,4 @@ Preview showcasing:
 - dynamic theme switching with a personal wallpaper script
 - lock screen
 
-![Preview](https://youtu.be/HsecSB-CDLA)
+[![Preview](https://img.youtube.com/vi/HsecSB-CDLA/0.jpg)](https://youtu.be/HsecSB-CDLA)
