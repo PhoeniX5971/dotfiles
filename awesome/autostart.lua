@@ -15,6 +15,8 @@ awful.spawn.with_shell("picom")
 -- Start xfce4 power manager
 awful.spawn.with_shell("xfce4-power-manager")
 
+awful.spawn.with_shell("parcellite")
+
 -- Update betterlockscreen wallpaper
 awful.spawn.with_shell("betterlockscreen -u ~/.cache/current_wallpaper.png")
 

@@ -36,7 +36,7 @@ Preview showcasing:
 - control center (currently only has slider for brightness and volume)
 - volume osd
 - brightness osd
-  notification center
+- notification center
 - dynamic theme switching with a personal wallpaper script
 - lock screen
 
