@@ -1,10 +1,10 @@
 local wibox = require("wibox")
-local awful = require("awful")
 local beautiful = require("beautiful")
 local helpers = require("helpers")
 local gears = require("gears")
 local config = require("config")
 local dpi = beautiful.xresources.apply_dpi
+local osd_container = require("ui.element.osd.osd_container")
 
 -- Brightness OSD Widget
 local brightness_osd = {}
@@ -60,17 +60,8 @@ brightness_osd.widget = wibox.widget({
 })
 
 -- Create the OSD popup
-brightness_osd.popup = awful.popup({
-	widget = brightness_osd.widget,
-	border_color = beautiful.border_color_normal,
-	border_width = beautiful.border_width,
-	ontop = true,
-	visible = false,
-	shape = helpers.rrect(dpi(6) * config.dpi_multiplier),
-	placement = function(c)
-		awful.placement.top(c, { margins = { top = dpi(50) * config.dpi_multiplier } })
-	end,
-})
+brightness_osd.widget.visible = false
+osd_container.register("brightness", brightness_osd.widget)
 
 -- Get current brightness (0-100) using brightnessctl
 local function get_brightness()
@@ -105,22 +96,7 @@ function brightness_osd.update()
 	end
 
 	-- Show OSD
-	brightness_osd.popup.visible = true
-
-	if hide_timer then
-		hide_timer:stop()
-		hide_timer = nil
-	end
-
-	hide_timer = gears.timer({
-		timeout = 1,
-		autostart = true,
-		single_shot = true,
-		callback = function()
-			brightness_osd.popup.visible = false
-			hide_timer = nil
-		end,
-	})
+	osd_container.show("brightness", 2)
 end
 
 return brightness_osd

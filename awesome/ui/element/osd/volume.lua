@@ -5,6 +5,7 @@ local helpers = require("helpers")
 local gears = require("gears")
 local config = require("config")
 local dpi = beautiful.xresources.apply_dpi
+local osd_container = require("ui.element.osd.osd_container")
 
 -- Volume OSD Widget
 local volume_osd = {}
@@ -60,17 +61,8 @@ volume_osd.widget = wibox.widget({
 })
 
 -- Create the OSD popup
-volume_osd.popup = awful.popup({
-	widget = volume_osd.widget,
-	border_color = beautiful.border_color_normal,
-	border_width = beautiful.border_width,
-	ontop = true,
-	visible = false,
-	shape = helpers.rrect(dpi(6)),
-	placement = function(c)
-		awful.placement.top(c, { margins = { top = dpi(50) * config.dpi_multiplier } })
-	end,
-})
+volume_osd.widget.visible = false
+osd_container.register("volume", volume_osd.widget)
 
 -- Function to get current volume status from pamixer
 local function get_volume_info()
@@ -108,24 +100,7 @@ function volume_osd.update()
 	end
 
 	-- Show the OSD
-	volume_osd.popup.visible = true
-
-	-- Cancel any previous hide timer
-	if hide_timer then
-		hide_timer:stop()
-		hide_timer = nil
-	end
-
-	-- Set timer to hide the OSD after 2 seconds
-	hide_timer = gears.timer({
-		timeout = 1,
-		autostart = true,
-		single_shot = true,
-		callback = function()
-			volume_osd.popup.visible = false
-			hide_timer = nil
-		end,
-	})
+	osd_container.show("volume", 2)
 end
 
 return volume_osd
