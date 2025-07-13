@@ -40,4 +40,6 @@ Preview showcasing:
 - dynamic theme switching with a personal wallpaper script
 - lock screen
 
+Apparently github doesn't support loading yt player, so click the image to go to the actual video.
+
 [![Preview](https://img.youtube.com/vi/HsecSB-CDLA/0.jpg)](https://youtu.be/HsecSB-CDLA)
