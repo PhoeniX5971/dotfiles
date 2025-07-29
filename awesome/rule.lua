@@ -32,4 +32,19 @@ ruled.client.connect_signal("request::rules", function()
 		},
 		properties = { floating = true },
 	})
+
+	-- Match VTube Studio window
+	awful.rules.rules = {
+		{
+			rule = { class = "VTube Studio" },
+			properties = {
+				floating = true,
+				ontop = true,
+				sticky = true,
+				border_width = 0,
+				focusable = false,
+				skip_taskbar = true,
+			},
+		},
+	}
 end)

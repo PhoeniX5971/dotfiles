@@ -10,6 +10,7 @@ local dpi = beautiful.xresources.apply_dpi
 -- notification list --
 
 local notifs_count = 0
+local notification_store = {}
 awesome.emit_signal("notifs::count", notifs_count)
 
 local label = wibox.widget({
@@ -29,6 +30,7 @@ local notifs_clear = wibox.widget({
 notifs_clear:buttons(gears.table.join(awful.button({}, 1, function()
 	_G.notif_center_reset_notifs_container()
 	notifs_count = 0
+	notification_store = {}
 	awesome.emit_signal("notifs::count", notifs_count)
 end)))
 
@@ -172,6 +174,17 @@ naughty.connect_signal("request::display", function(n)
 		appicon = beautiful.notification_icon
 	end
 
+	-- INFO: Added for easier export
+	local time = os.date("%H:%M:%S")
+	local notif_data = {
+		title = n.title,
+		message = n.message,
+		time = time,
+	}
+
+	-- Store the notification data
+	table.insert(notification_store, 1, notif_data)
+
 	notifs_container:insert(1, create_notif(appicon, n, width))
 	notifs_count = notifs_count + 1
 	awesome.emit_signal("notifs::count", notifs_count)
@@ -263,3 +276,18 @@ awful.mouse.append_global_mousebinding(awful.button({}, 1, function()
 		awesome.emit_signal("open::notif_center")
 	end
 end))
+
+-- INFO: EXPORT FUNCTION FOR AI
+local json = require("dkjson")
+_G.export_notifications = function()
+	local json_str = json.encode(notification_store, { indent = true })
+	local file_path = os.getenv("HOME") .. "/code/ai/yue/data/notifications.json"
+	local f = io.open(file_path, "w")
+	if f then
+		f:write(json_str)
+		f:close()
+		return true
+	else
+		return false
+	end
+end

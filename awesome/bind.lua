@@ -116,6 +116,9 @@ awful.keyboard.append_global_keybindings({
 			--date-font="DM Mono Bold"
 		]])
 	end, { description = "Lock Screen", group = "custom" }),
+	awful.key({ modkey }, "F5", function()
+		awful.spawn.with_shell("bash -c '~/code/ai/yue/ai/integrations/stt/stt.sh'")
+	end, { description = "Send TTS to yue", group = "custom" }),
 
 	-- Tag keybinds
 	awful.key({
