@@ -4,6 +4,7 @@ local volume_slider = require("ui.element.controlcenter.component.volume")
 local brightness_slider = require("ui.element.controlcenter.component.brightness")
 local volume_osd = require("ui.element.osd.volume")
 local brightness_osd = require("ui.element.osd.brightness")
+local mute = false
 
 -- Mouse
 client.connect_signal("request::default_mousebindings", function()
@@ -73,6 +74,15 @@ awful.keyboard.append_global_keybindings({
 			volume_osd.update()
 		end)
 	end, { description = "toggle mute", group = "media" }),
+
+	awful.key({ modkey, "Shift" }, "m", function()
+		mute = not mute -- toggle mute variable
+		if mute then
+			awful.spawn("pactl set-source-mute 57 1") -- mute mic
+		else
+			awful.spawn("pactl set-source-mute 57 0") -- unmute mic
+		end
+	end, { description = "toggle mute mic", group = "media" }),
 
 	awful.key({}, "XF86MonBrightnessUp", function()
 		awful.spawn.easy_async_with_shell("brightnessctl set +5% && sleep 0.05", function()

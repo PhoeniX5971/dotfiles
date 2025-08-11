@@ -35,7 +35,7 @@ taglist_bg_occupied="#00000000" # Transparent background for taglist occupied
 taglist_bg_empty="#00000000"    # Transparent background for taglist empty
 taglist_bg_urgent="$color3"     # Keep taglist urgent background as normal
 
-border_color_active="$color2"
+border_color_active="$color3"
 
 # Write new theme.lua
 cat >"$THEME_FILE" <<EOF

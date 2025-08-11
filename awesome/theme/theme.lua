@@ -38,7 +38,7 @@ theme.systray_icon_spacing = dpi(8) * config.dpi_multiplier
 theme.useless_gap = dpi(8) * config.dpi_multiplier
 theme.border_width = dpi(2) * config.dpi_multiplier
 theme.border_color_normal = "#201f21"
-theme.border_color_active = "#5FCBFD"
+theme.border_color_active = "#9098A8"
 theme.border_color_marked = "#201f21"
 theme.tooltip_opacity = 0
 

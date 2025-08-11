@@ -1,22 +1,22 @@
 /**
  * Auto-generated Material Discord Theme (via pywal)
- * Accent: #A493E4
+ * Accent: #279BCF
  */
 
 @import url(https://capnkitten.github.io/BetterDiscord/Themes/Material-Discord/css/source.css);
 @import url(https://capnkitten.github.io/BetterDiscord/Themes/Material-Discord/css/addons/material-you/source.css);
 
 :root {
-    --accent-hue: 252;
-    --accent-saturation: 60%;
-    --accent-lightness: 74%;
-    --accent-text-color: #f4e1ef;
-    --accent-button-action: #f4e1ef;
+    --accent-hue: 198;
+    --accent-saturation: 68%;
+    --accent-lightness: 48%;
+    --accent-text-color: #c9e1ec;
+    --accent-button-action: #c9e1ec;
 
     --alert-hue: 0;
     --alert-saturation: 85%;
     --alert-lightness: 61%;
-    --alert-text-color: #f4e1ef;
+    --alert-text-color: #c9e1ec;
 
     --message-radius: 18px;
     --media-radius: 10px;

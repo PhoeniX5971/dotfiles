@@ -12,9 +12,6 @@ awful.spawn.with_shell("setsid setxkbmap -option caps:escape >/dev/null 2>&1 &")
 -- Start picom (with your config file)
 awful.spawn.with_shell("picom")
 
--- Start xfce4 power manager
-awful.spawn.with_shell("xfce4-power-manager")
-
 awful.spawn.with_shell("parcellite")
 
 -- Update betterlockscreen wallpaper
