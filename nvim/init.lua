@@ -28,7 +28,7 @@ require("config.lazy")
 --     },
 -- })
 --
-vim.cmd.colorscheme("carbonfox") -- Apply the theme
+vim.cmd.colorscheme("candyland") -- Apply the theme
 
 -- Make background transparent {
 vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
@@ -57,13 +57,13 @@ vim.api.nvim_set_hl(0, "FloatBorder", { bg = "NONE" }) -- Borders of floating wi
 
 -- -- Code to use terminal colors
 -- vim.opt.termguicolors = false
-vim.opt.background = "dark"
+-- vim.opt.background = "dark"
 -- vim.cmd("colorscheme default")
 
 -- Set Indentation
-vim.opt.tabstop = 4 -- Sets the number of spaces that a <Tab> in the file will represent
-vim.opt.softtabstop = 4 -- Sets the number of spaces that a <Tab> character will represent when editing
-vim.opt.shiftwidth = 4 -- Sets the number of spaces to use for each step of (auto)indent
+-- vim.opt.tabstop = 4 -- Sets the number of spaces that a <Tab> in the file will represent
+-- vim.opt.softtabstop = 4 -- Sets the number of spaces that a <Tab> character will represent when editing
+-- vim.opt.shiftwidth = 4 -- Sets the number of spaces to use for each step of (auto)indent
 vim.opt.expandtab = false -- Prevents tabs from being expanded to spaces
 
 -- In your LazyVim config or init.vim file, add this to set clangd-specific settings

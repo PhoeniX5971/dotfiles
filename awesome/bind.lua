@@ -56,14 +56,14 @@ awful.keyboard.append_global_keybindings({
 		awful.util.spawn("playerctl previous")
 	end),
 	awful.key({}, "XF86AudioLowerVolume", function()
-		awful.spawn.easy_async_with_shell("pamixer --decrease 5 && sleep 0.05", function()
+		awful.spawn.easy_async_with_shell("pamixer --decrease 5 && sleep 0.01", function()
 			volume_slider.slider.update_volume()
 			volume_osd.update()
 		end)
 	end, { description = "lower volume", group = "media" }),
 
 	awful.key({}, "XF86AudioRaiseVolume", function()
-		awful.spawn.easy_async_with_shell("pamixer --increase 5 && sleep 0.05", function()
+		awful.spawn.easy_async_with_shell("pamixer --increase 5 && sleep 0.01", function()
 			volume_slider.slider.update_volume()
 			volume_osd.update()
 		end)

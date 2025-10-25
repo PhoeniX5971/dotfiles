@@ -38,8 +38,8 @@ bash "$SCRIPT_DIR/wallpaper1.sh" "$NEW_WALLPAPER"
 echo "Wallpaper script executed."
 
 # Apply the new wallpaper using the python script
-python3 "$DOTFILES_HYPR_DIR/scripts/wallpaper.py" --image "$NEW_WALLPAPER"
-echo "Hyprland wallpaper script executed."
+#python3 "$DOTFILES_HYPR_DIR/scripts/wallpaper.py" --image "$NEW_WALLPAPER"
+#echo "Hyprland wallpaper script executed."
 
 # Run the AwesomeWM theme script
 bash "$SCRIPT_DIR/theme.sh"

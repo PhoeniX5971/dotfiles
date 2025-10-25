@@ -48,7 +48,7 @@ local get_taglist = function(s)
 						id = "icon_role",
 						align = "center",
 						valign = "center",
-						font = "DF Mono",
+						font = "DF Mono  " .. 12.25 * config.dpi_multiplier,
 						widget = wibox.widget.textbox,
 					},
 					widget = wibox.container.margin,
@@ -71,7 +71,7 @@ local get_taglist = function(s)
 						self.fg = beautiful.taglist_fg_focus -- Foreground color for focused
 					elseif #tag:clients() > 0 then
 						-- If the tag has clients (occupied)
-						icon_widget.text = "" -- Occupied
+						icon_widget.text = "" -- Occupied
 						self.bg = beautiful.taglist_bg_occupied -- Transparent background for occupied
 						self.fg = beautiful.taglist_fg_occupied -- Foreground color for occupied
 					else

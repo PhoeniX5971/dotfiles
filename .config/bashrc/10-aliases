@@ -19,7 +19,7 @@ alias wifi='nmtui'
 alias cleanup='~/.config/ml4w/scripts/cleanup.sh'
 alias dmenu='dmenu_run -i -p "Run:" -fn "monospace-12" -nb "#161616" -nf "#eff7ff" -sb "#91b5d1" -sf "#ffffff"'
 alias wallpaper='~/.config/awesome/scripts/wallpaper.sh'
-alias activate-ai='source ~/python-libs/venv/bin/activate'
+alias yue-ai='source ~/python-libs/yue/bin/activate'
 
 # -----------------------------------------------------
 # ML4W Apps

@@ -54,7 +54,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 									widget = wibox.container.margin, -- Margin for battery widget
 								},
 								clock,
-								spacing = dpi(6) * config.dpi_multiplier, -- Spacing between widgets
+								spacing = dpi(4) * config.dpi_multiplier, -- Spacing between widgets
 								layout = (config.placement == "left" or config.placement == "right")
 										and wibox.layout.fixed.vertical
 									or wibox.layout.fixed.horizontal,
