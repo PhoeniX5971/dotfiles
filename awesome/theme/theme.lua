@@ -4,45 +4,45 @@ local config = require("config")
 
 local theme = {}
 
-theme.font = "ProFont IIx Nerd Font Mono Bold " .. 14 * config.dpi_multiplier
+theme.font = "DM Mono Bold " .. 14 * config.dpi_multiplier
 
-theme.bg_normal = "#1c1536"
-theme.bg_focus = "#A493E4"
-theme.bg_urgent = "#B2A4FD"
+theme.bg_normal = "#000002"
+theme.bg_focus = "#0B52A4"
+theme.bg_urgent = "#3F74B7"
 
-theme.fg_normal = "#f4e1ef"
-theme.fg_focus = "#F0B7F8"
-theme.fg_urgent = "#A493E4"
+theme.fg_normal = "#c6e6ee"
+theme.fg_focus = "#5DB0E4"
+theme.fg_urgent = "#0B52A4"
 
-theme.tasklist_bg_focus = "#1c1536"
-theme.tasklist_bg_urgent = "#1c1536"
-theme.tasklist_fg_normal = "#f4e1ef25"
-theme.tasklist_fg_focus = "#f4e1ef"
-theme.tasklist_fg_urgent = "#FC99F8"
-theme.tasklist_fg_minimize = "#f4e1ef25"
+theme.tasklist_bg_focus = "#000002"
+theme.tasklist_bg_urgent = "#000002"
+theme.tasklist_fg_normal = "#c6e6ee25"
+theme.tasklist_fg_focus = "#c6e6ee"
+theme.tasklist_fg_urgent = "#0A6CD4"
+theme.tasklist_fg_minimize = "#c6e6ee25"
 theme.tasklist_font_minimized = "JetBrains Mono NF Italic Bold " .. 13 * config.dpi_multiplier
 theme.tasklist_plain_task_name = true
 
-theme.taglist_fg_focus = "#F0B7F8"
-theme.taglist_fg_empty = "#f4e1ef25"
-theme.taglist_fg_occupied = "#f4e1ef"
-theme.taglist_fg_urgent = "#A493E4"
+theme.taglist_fg_focus = "#5DB0E4"
+theme.taglist_fg_empty = "#c6e6ee25"
+theme.taglist_fg_occupied = "#c6e6ee"
+theme.taglist_fg_urgent = "#0B52A4"
 theme.taglist_bg_focus = "#00000000"
 theme.taglist_bg_occupied = "#00000000"
 theme.taglist_bg_empty = "#00000000"
-theme.taglist_bg_urgent = "#FC99F8"
+theme.taglist_bg_urgent = "#0A6CD4"
 
-theme.bg_systray = "#A493E4"
+theme.bg_systray = "#0B52A4"
 theme.systray_icon_spacing = dpi(8) * config.dpi_multiplier
 
 theme.useless_gap = dpi(8) * config.dpi_multiplier
 theme.border_width = dpi(2) * config.dpi_multiplier
-theme.border_color_normal = "#1c1536"
-theme.border_color_active = "#FC99F8"
-theme.border_color_marked = "#1c1536"
+theme.border_color_normal = "#000002"
+theme.border_color_active = "#0A6CD4"
+theme.border_color_marked = "#000002"
 theme.tooltip_opacity = 0
 
-theme.battery = "#f4e1ef"
+theme.battery = "#c6e6ee"
 theme.battery_green = "#00ff00"
 theme.battery_yellow = "#ffff00"
 theme.battery_red = "#ff0000"

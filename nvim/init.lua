@@ -28,7 +28,7 @@ require("config.lazy")
 --     },
 -- })
 --
-vim.cmd.colorscheme("candyland") -- Apply the theme
+vim.cmd.colorscheme("carbonfox") -- Apply the theme
 
 -- Make background transparent {
 vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
