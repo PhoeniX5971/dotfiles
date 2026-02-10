@@ -83,8 +83,8 @@ client.connect_signal("manage", function(c)
 	end
 end)
 
-client.connect_signal("manage", function(c)
-	c.shape = function(cr, w, h)
-		gears.shape.rounded_rect(cr, w, h, dpi(15)) -- Apply rounded corners to clients
-	end
-end)
+-- client.connect_signal("manage", function(c)
+-- 	c.shape = function(cr, w, h)
+-- 		gears.shape.rounded_rect(cr, w, h, dpi(15)) -- Apply rounded corners to clients
+-- 	end
+-- end)

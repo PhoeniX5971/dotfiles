@@ -4,7 +4,7 @@ local config = require("config")
 
 local theme = {}
 
-theme.font = "DM Mono Bold " .. 14 * config.dpi_multiplier
+theme.font = "ProFont IIx Nerd Font Mono Bold " .. 14 * config.dpi_multiplier
 
 theme.bg_normal = "#000002"
 theme.bg_focus = "#0B52A4"

@@ -28,7 +28,10 @@ require("config.lazy")
 --     },
 -- })
 --
+-- vim.cmd.colorscheme("catppuccin-latte") -- Apply the theme
 vim.cmd.colorscheme("carbonfox") -- Apply the theme
+
+-- vim.opt.background = "light"
 
 -- Make background transparent {
 vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
@@ -57,7 +60,6 @@ vim.api.nvim_set_hl(0, "FloatBorder", { bg = "NONE" }) -- Borders of floating wi
 
 -- -- Code to use terminal colors
 -- vim.opt.termguicolors = false
--- vim.opt.background = "dark"
 -- vim.cmd("colorscheme default")
 
 -- Set Indentation
